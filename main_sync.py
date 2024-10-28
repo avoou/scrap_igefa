@@ -51,7 +51,7 @@ def main():
         count=count
     )
 
-    print(count) #72
+    print(count) #72 count seems similar to the one on web site
 
     with open('gathered_links2.json', 'w') as f:
         f.write(json.dumps(gathered_json))

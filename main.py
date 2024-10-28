@@ -62,7 +62,7 @@ async def main():
         )
 
     async with aiofiles.open('gathered_links.json', 'w') as f:
-        await f.write(json.dumps(gathered_json))
+        await f.write(json.dumps(gathered_json, ensure_ascii=False))
 
     print(count) #483
 
