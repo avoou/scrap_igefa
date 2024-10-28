@@ -1,0 +1,1314 @@
+{
+    "kategorien": {
+        "name": "Kategorien",
+        "id": "f4SXre6ovVohkGNrAvh3zR"
+    },
+    "reinigungschemie": {
+        "name": "Reinigungschemie",
+        "id": "AjPEJ5AjiEqXBLVWPcjzFB"
+    },
+    "hygienebekleidung": {
+        "name": "Hygienebekleidung",
+        "id": "RQjMHKvZLH97LmCc7rQBFL"
+    },
+    "entsorgung": {
+        "name": "Entsorgung",
+        "id": "bZpxVTdHHfBsHKnVqmpcRd"
+    },
+    "mobile-reinigung": {
+        "name": "Mobile Reinigung",
+        "id": "MegozpYzDSmdBmCfFW8xCc"
+    },
+    "waschraum-hygiene": {
+        "name": "Waschraum-Hygiene",
+        "id": "AycY6LWMba5cXn5esuFfRL"
+    },
+    "reinigungsmaschinen": {
+        "name": "Reinigungsmaschinen",
+        "id": "yX8Q2Gf4ABmErbf4XHangX"
+    },
+    "spezialanwendungen": {
+        "name": "Spezialanwendungen",
+        "id": "wFewXcTuNYvY6niku9Bpfh"
+    },
+    "kopfschutz": {
+        "name": "Kopfschutz",
+        "id": "777qcijuiMpAyMtQs7cvy6"
+    },
+    "doppelfahrwagen": {
+        "name": "Doppelfahrwagen",
+        "id": "W4e7BZAb6QszecNzALcve"
+    },
+    "bodenreinigung": {
+        "name": "Bodenreinigung",
+        "id": "UnymBFHrtbASG6tAFTk3zn"
+    },
+    "stationaere-entsorgungssysteme": {
+        "name": "Station\u00e4re Entsorgungssysteme",
+        "id": "xhTzkA35wRzwfXuxS9FrNJ"
+    },
+    "handtuchpapier-spender": {
+        "name": "Handtuchpapier/ - spender",
+        "id": "aaUNbzpX2S4RB8gff88B4H"
+    },
+    "sanitaerraumreinigung": {
+        "name": "Sanit\u00e4rraumreinigung",
+        "id": "ZDZvc67vTPKCM633U4Pajb"
+    },
+    "sauger": {
+        "name": "Sauger",
+        "id": "88UHqQGcuVfVco4etsJt3V"
+    },
+    "reinigungshilfen": {
+        "name": "Reinigungshilfen",
+        "id": "moheDPVG3pP8t8kgmxZrDc"
+    },
+    "textilreinigung": {
+        "name": "Textilreinigung",
+        "id": "ySeoxm32MhPMRWcDNv57Cd"
+    },
+    "desinfektion": {
+        "name": "Desinfektion",
+        "id": "2VHxv37y56RJumBVe6jSBK"
+    },
+    "feuchtwischsysteme": {
+        "name": "Feuchtwischsysteme",
+        "id": "uAYmCqDrEKzz9EQhnaXehh"
+    },
+    "oberflaechenreinigung": {
+        "name": "Oberfl\u00e4chenreinigung",
+        "id": "7agQnb8pxUJCCdfSnFyeWb"
+    },
+    "format-handtuchpapier": {
+        "name": "Format-Handtuchpapier",
+        "id": "iNrwVsx54nLGHCXf9mLMH5"
+    },
+    "toilettensitzauflagen-spender": {
+        "name": "Toilettensitzauflagen/ -spender",
+        "id": "QZd7ckhz5RnGate2Vg9Bhg"
+    },
+    "hygienebeutel-spender": {
+        "name": "Hygienebeutel/ -spender",
+        "id": "bCvG7tEUjZs2ktaGNZo8L9"
+    },
+    "kosmetiktuecher-spenderboxen": {
+        "name": "Kosmetikt\u00fccher/ -spenderboxen",
+        "id": "thXhwQ6rxzp5beV4upcWkA"
+    },
+    "nasswischsysteme": {
+        "name": "Nasswischsysteme",
+        "id": "J3PHadHQM3zwr5AJ8974RQ"
+    },
+    "abfalleimer-abfallbehaelter": {
+        "name": "Abfalleimer/Abfallbeh\u00e4lter",
+        "id": "yevC89X7DAdjLmPHjogBnN"
+    },
+    "toilettenpapier-spender": {
+        "name": "Toilettenpapier/ -spender",
+        "id": "woq84ebrC76qkaYgEDQLzM"
+    },
+    "stiele": {
+        "name": "Stiele",
+        "id": "tpsuXdYz8RS2iXXhTusxCD"
+    },
+    "kuechen-und-geschirrreinigung": {
+        "name": "K\u00fcchen- und Geschirrreinigung",
+        "id": "zk9rY3mbQWHt3PaYHwP8cc"
+    },
+    "trockensauger": {
+        "name": "Trockensauger",
+        "id": "L2PsnTvHohgJQmuFz5BG5E"
+    },
+    "sanitaerunterhaltsreiniger": {
+        "name": "Sanit\u00e4runterhaltsreiniger",
+        "id": "W76xNbTiptDiDbhghGXCt8"
+    },
+    "sonstiges": {
+        "name": "Sonstiges",
+        "id": "WEtYH2VS7ooGR7KM3Wv4gi"
+    },
+    "schaedlingsbekaempfung-und-pflanzenschutz": {
+        "name": "Sch\u00e4dlingsbek\u00e4mpfung und Pflanzenschutz",
+        "id": "zXXSFGAitZjbeCrhFFBE2o"
+    },
+    "grundreiniger": {
+        "name": "Grundreiniger",
+        "id": "mteKtbmW8BMV7y3hiiQuZ8"
+    },
+    "atemschutz": {
+        "name": "Atemschutz",
+        "id": "ACK8ayFdRSDnH8VJiRZkpP"
+    },
+    "trockenwischsysteme": {
+        "name": "Trockenwischsysteme",
+        "id": "oVUrfdvC7XN4b4vAub8CbX"
+    },
+    "automatenreiniger": {
+        "name": "Automatenreiniger",
+        "id": "d5ypZ72y2LWouMSRdcJBBH"
+    },
+    "reiniger-fuer-spezialbelaege": {
+        "name": "Reiniger f\u00fcr Spezialbel\u00e4ge",
+        "id": "TyV2YPqqoVV4q7eN57uEuL"
+    },
+    "bezuege": {
+        "name": "Bez\u00fcge",
+        "id": "FsVyyWaf3yScddqsb6aRx4"
+    },
+    "halter": {
+        "name": "Halter",
+        "id": "daJFZuQrmbSFBdmBjFcABc"
+    },
+    "beschichtungen": {
+        "name": "Beschichtungen",
+        "id": "YXGRsDHdHwcz9VpZNFoRt5"
+    },
+    "luftverbesserung": {
+        "name": "Luftverbesserung",
+        "id": "AWKjQUH8Qxm5MhewMcpaCU"
+    },
+    "auftragssysteme": {
+        "name": "Auftragssysteme",
+        "id": "dK3WDTbQdUWWxDR9UtTKSP"
+    },
+    "waschraum-abfallbehaelter": {
+        "name": "Waschraum Abfallbeh\u00e4lter",
+        "id": "zyQUjGFAZVidYwRj3Xtm7N"
+    },
+    "reinigungstuecher-mehrweg": {
+        "name": "Reinigungst\u00fccher - Mehrweg",
+        "id": "XCFMebBb6yJ489Qn7pHa4X"
+    },
+    "waschmittel": {
+        "name": "Waschmittel",
+        "id": "ULv5i2VYYcoVfn7kdKeorN"
+    },
+    "einzelblatt-toilettenpapier": {
+        "name": "Einzelblatt-Toilettenpapier",
+        "id": "cNW5bvDTqE4ZJRSb8MHmWZ"
+    },
+    "unterhaltsreiniger": {
+        "name": "Unterhaltsreiniger",
+        "id": "UZ58DPNjGf6axF3MRtAw6Q"
+    },
+    "hand-und-koerperhygiene": {
+        "name": "Hand- und K\u00f6rperhygiene",
+        "id": "4FbgPWLh6w4AUE26vKg9xe"
+    },
+    "manuelles-spuelen": {
+        "name": "Manuelles Sp\u00fclen",
+        "id": "ij2yvvE9iUPxPLHRugHiLc"
+    },
+    "abfallgreifzangen": {
+        "name": "Abfallgreifzangen",
+        "id": "2X3sNtvLhALCvfQGSsx4sF"
+    },
+    "muellbeutel-abfallsaecke": {
+        "name": "M\u00fcllbeutel/ Abfalls\u00e4cke",
+        "id": "mp2dkPfNSqD68JYZNFgFvB"
+    },
+    "spezialprodukte": {
+        "name": "Spezialprodukte",
+        "id": "k63VdvLWFD7j482tTnQQRk"
+    },
+    "rollen-handtuchpapier": {
+        "name": "Rollen-Handtuchpapier",
+        "id": "ME2QmBdg5gz77ZCwVUGFS9"
+    },
+    "sauger-zubehoer-staubfilterbeutel": {
+        "name": "Sauger-Zubeh\u00f6r Staubfilterbeutel",
+        "id": "5b9nKkC7peAdBjLt3Jqmhg"
+    },
+    "allzweckreiniger": {
+        "name": "Allzweckreiniger",
+        "id": "qhspLARfXqGxtiMfPCuHhf"
+    },
+    "buerstsauger": {
+        "name": "B\u00fcrstsauger",
+        "id": "araLkhKMA5DX8NxvqDFtuh"
+    },
+    "winterdienst": {
+        "name": "Winterdienst",
+        "id": "Z5Xo2cXuEAr36Eexvxgk49"
+    },
+    "flaechendesinfektion": {
+        "name": "Fl\u00e4chendesinfektion",
+        "id": "5PtRTMDnhPkR8JCwX9qwki"
+    },
+    "sanitaergrundreiniger": {
+        "name": "Sanit\u00e4rgrundreiniger",
+        "id": "dLJJCMrpTTZ6Qw8AbiDYNS"
+    },
+    "sonstige-reinigungshilfen": {
+        "name": "Sonstige Reinigungshilfen",
+        "id": "TMUfpV7kHwjK7vEAuYrYsi"
+    },
+    "reinigungstuecher-einweg": {
+        "name": "Reinigungst\u00fccher - Einweg",
+        "id": "eeHKxtp4Nmqw6Zr9rPriaU"
+    },
+    "trockensauger-mit-kabel": {
+        "name": "Trockensauger mit Kabel",
+        "id": "qkwJn6PazoufQGrmWxRvDd"
+    },
+    "besen-schrubber-wischer-wasserschieber": {
+        "name": "Besen/ Schrubber/ Wischer/ Wasserschieber",
+        "id": "Xp7ZGxnjYrwU3yDJpURc7R"
+    },
+    "wannen-koerbe-eimer": {
+        "name": "Wannen/ K\u00f6rbe/ Eimer",
+        "id": "atk9bj32Y9jcaHX4YYSyb9"
+    },
+    "leitern-spachtel-schaufeln": {
+        "name": "Leitern/ Spachtel/ Schaufeln",
+        "id": "aL7xLEFb97qm9Z2bFZXkgG"
+    },
+    "fussschutz": {
+        "name": "Fu\u00dfschutz",
+        "id": "gPWEqoyqHJPqcJX2562jVB"
+    },
+    "schaedlingsbekaempfungsmittel": {
+        "name": "Sch\u00e4dlingsbek\u00e4mpfungsmittel",
+        "id": "uJEWUgbZnMLEJJToHfwHsL"
+    },
+    "kunststoffreiniger": {
+        "name": "Kunststoffreiniger",
+        "id": "mVcBUwSkc7xvnKTj3A9txE"
+    },
+    "papierkoerbe": {
+        "name": "Papierk\u00f6rbe",
+        "id": "WsSRVJkCEJAJuYUDPUrBMM"
+    },
+    "haut-haendedesinfektion": {
+        "name": "Haut-/ H\u00e4ndedesinfektion",
+        "id": "mWgEtYHVaiN4vEx57LrzU7"
+    },
+    "glasreiniger": {
+        "name": "Glasreiniger",
+        "id": "k69tBzCuFHZBCV7b79ADdF"
+    },
+    "alkohol-glanzreiniger": {
+        "name": "Alkohol-/ Glanzreiniger",
+        "id": "6Ngkjm5Y8LvwiR3ETKFFM4"
+    },
+    "desinfektionsreiniger": {
+        "name": "Desinfektionsreiniger",
+        "id": "jH37vJChRmx6vXNyfPdJ7V"
+    },
+    "einweg-kopfbedeckung": {
+        "name": "Einweg-Kopfbedeckung",
+        "id": "nPRMn4k6wjd5wFwMgwn83F"
+    },
+    "besen-schrubberstiele-geraetehalter": {
+        "name": "Besen-/ Schrubberstiele/ Ger\u00e4tehalter",
+        "id": "DoEyR3foUMCfqQvjGXgArY"
+    },
+    "topfreiniger-stahlwolle": {
+        "name": "Topfreiniger/ Stahlwolle",
+        "id": "b7jy3ack9SXui5ZK5oS4cW"
+    },
+    "technische-chemikalien": {
+        "name": "technische Chemikalien",
+        "id": "jsYRGP5i5zTsif5pg8XvN8"
+    },
+    "industrie-werkstattreiniger": {
+        "name": "Industrie-/ Werkstattreiniger",
+        "id": "sFnqqyF9kh6kqTVWBARgYF"
+    },
+    "neutralreiniger": {
+        "name": "Neutralreiniger",
+        "id": "6vG6d2iNe9bQRkUUZWN3Mg"
+    },
+    "luftverbesserer": {
+        "name": "Luftverbesserer",
+        "id": "umw79LbY9JPFdSYPz4r8vD"
+    },
+    "emulsionen": {
+        "name": "Emulsionen",
+        "id": "od8vmxQtzKCU54BP84tb2J"
+    },
+    "chemische-reinigungsprodukte": {
+        "name": "Chemische Reinigungsprodukte",
+        "id": "yU7QfV3hwgxrz4Dg8tT9A6"
+    },
+    "buersten": {
+        "name": "B\u00fcrsten",
+        "id": "V7Q9t2sdu4wsdjfbNJu2gH"
+    },
+    "polsterreiniger-und-fleckenentferner": {
+        "name": "Polsterreiniger und Fleckenentferner",
+        "id": "q9RfY3VGpsD46hW74VSTKC"
+    },
+    "fensterreinigungsgeraete": {
+        "name": "Fensterreinigungsger\u00e4te",
+        "id": "SGEwvoLWGnS9LZLCzTGjKC"
+    },
+    "wachse": {
+        "name": "Wachse",
+        "id": "dzmXdoYjXHqYQnjyPGXHzU"
+    },
+    "dispersionen": {
+        "name": "Dispersionen",
+        "id": "QU5oTt4tUS4DxVs4cZohUm"
+    },
+    "teppichreiniger": {
+        "name": "Teppichreiniger",
+        "id": "feziUrGV3toXuyYanyzREf"
+    },
+    "handreiniger": {
+        "name": "Handreiniger",
+        "id": "dHmE6HKvrLpsdXFuX63vfD"
+    },
+    "spender-fuer-handseifen-und-handreiniger": {
+        "name": "Spender f\u00fcr Handseifen und Handreiniger",
+        "id": "JtnMTrq3KwNeX6DGb2xhaQ"
+    },
+    "toilettenoel": {
+        "name": "Toiletten\u00f6l",
+        "id": "7BCcU6hJXFvRYbobQtCbq5"
+    },
+    "einweg-mund-und-staubschutz": {
+        "name": "Einweg-Mund- und Staubschutz",
+        "id": "awS54urbkmJYSKwvzLccEf"
+    },
+    "allzweck-universalwischtuecher": {
+        "name": "Allzweck-/ Universalwischt\u00fccher",
+        "id": "DqtVW2ZU5QfWu8YuibwxBh"
+    },
+    "spuel-und-schwammtuecher": {
+        "name": "Sp\u00fcl- und Schwammt\u00fccher",
+        "id": "x5UYNh6mfKdcF9uzZydd69"
+    },
+    "dosiersysteme": {
+        "name": "Dosiersysteme",
+        "id": "vGvdnXrSbaRWGWtFwgQDGn"
+    },
+    "bodenreinigungstuecher": {
+        "name": "Bodenreinigungst\u00fccher",
+        "id": "s5ha9LnCdyqz9Ecgxhv4qE"
+    },
+    "feuchtreinigungstuecher": {
+        "name": "Feuchtreinigungst\u00fccher",
+        "id": "CcoEYYYT6XxXvkNn6LDRcJ"
+    },
+    "handschutz": {
+        "name": "Handschutz",
+        "id": "TE8aMMM7kAPEpyiKfiFeUW"
+    },
+    "gitterkoerbe": {
+        "name": "Gitterk\u00f6rbe",
+        "id": "crsMYxVcw7bDK7BumHLwKB"
+    },
+    "edelstahl-glaskeramik-reiniger-pflege": {
+        "name": "Edelstahl-/Glaskeramik-Reiniger/-Pflege",
+        "id": "c8b8gC5PEmgQyrEnP54qP4"
+    },
+    "jumborollen-toilettenpapier": {
+        "name": "Jumborollen-Toilettenpapier",
+        "id": "r5E7LPMf6gBEjgurexQFvN"
+    },
+    "hautschutz": {
+        "name": "Hautschutz",
+        "id": "zpPaKTdYMrxazFuSEDcsuh"
+    },
+    "mund-und-zahnpflege": {
+        "name": "Mund- und Zahnpflege",
+        "id": "F9NSPhx4PT6AkVUyHxdsSh"
+    },
+    "hygienebehaelter": {
+        "name": "Hygienebeh\u00e4lter",
+        "id": "gcr4YWjAXrTdhzzTjMxpGY"
+    },
+    "schwingdeckeleimer": {
+        "name": "Schwingdeckeleimer",
+        "id": "2AwpJciENwrEpxLawWSk6c"
+    },
+    "komplettsysteme": {
+        "name": "Komplettsysteme",
+        "id": "KfkG53yLFMYctZEMWANQwc"
+    },
+    "einfachfahrwagen": {
+        "name": "Einfachfahrwagen",
+        "id": "Le8QpPs6NxuM5QBe8ZP59o"
+    },
+    "handfeger-kehrschaufeln-kehrgarnituren": {
+        "name": "Handfeger/ Kehrschaufeln/ Kehrgarnituren",
+        "id": "zofTBrvEcfrQzDPR9DcHrF"
+    },
+    "kleinrollen-toilettenpapier": {
+        "name": "Kleinrollen-Toilettenpapier",
+        "id": "vewSK2xR7wJ8j5Ta7rn9KL"
+    },
+    "taschentuecher": {
+        "name": "Taschent\u00fccher",
+        "id": "aJaGNDARHNfp3pJkVkRZDE"
+    },
+    "maschinelles-spuelen": {
+        "name": "Maschinelles Sp\u00fclen",
+        "id": "iZxUmcviY7c8dwcACWECZ4"
+    },
+    "bodenreinigungsscheiben": {
+        "name": "Bodenreinigungsscheiben",
+        "id": "NLHBXyFhjM4M8y7WJ4QzK8"
+    },
+    "beckensteineinsaetze-und-urinalsiebe": {
+        "name": "Beckensteineins\u00e4tze und Urinalsiebe",
+        "id": "wSMttFbNR35CwcCBRbchtQ"
+    },
+    "muellbeutel-bis-70-l": {
+        "name": "M\u00fcllbeutel bis 70 l",
+        "id": "924Xk8JJCPDqFu8iYSWWYB"
+    },
+    "essigreiniger": {
+        "name": "Essigreiniger",
+        "id": "qoZ7MJ9PywTUgitJtf6hCU"
+    },
+    "tauchreiniger": {
+        "name": "Tauchreiniger",
+        "id": "U47Ru5AuwCiVPUiWBweS6n"
+    },
+    "damenhygiene": {
+        "name": "Damenhygiene",
+        "id": "4JTr5ip6ui3XqPTfJiD5re"
+    },
+    "waschhilfsmittel": {
+        "name": "Waschhilfsmittel",
+        "id": "2MfocF468oComiz9WCaDZT"
+    },
+    "rasierartikel": {
+        "name": "Rasierartikel",
+        "id": "asfneWKFKWeBbGW64unhrW"
+    },
+    "handspuelmittel": {
+        "name": "Handsp\u00fclmittel",
+        "id": "3S9duYfyzTgWecvMDbfAyf"
+    },
+    "abfallsaecke-ueber-100-l": {
+        "name": "Abfalls\u00e4cke \u00fcber 100 l",
+        "id": "jPjif8V3dzKRhjSgghbpB4"
+    },
+    "beckensteine-wc-einhaenger": {
+        "name": "Beckensteine/WC-Einh\u00e4nger",
+        "id": "Knro5GuvKT5Z7PcsbMhKak"
+    },
+    "buerstsauger-mit-kabel": {
+        "name": "B\u00fcrstsauger mit Kabel",
+        "id": "kiy5tKhxZZiTzj7P54b8fJ"
+    },
+    "erfrischungstuecher-und-spender": {
+        "name": "Erfrischungst\u00fccher und Spender",
+        "id": "Xe7fvCdv8k4kD9bWiuLEgH"
+    },
+    "schimmelentferner": {
+        "name": "Schimmelentferner",
+        "id": "wcsf4NLexz9JdoHSeCffpV"
+    },
+    "geraetedesinfektion": {
+        "name": "Ger\u00e4tedesinfektion",
+        "id": "TeG4joFB3PeC6Xx5ctoTiT"
+    },
+    "abfallsaecke-ueber-70-l-bis-100-l": {
+        "name": "Abfalls\u00e4cke \u00fcber 70 l bis 100 l",
+        "id": "YLoLcAZGMFcexqFh6unST8"
+    },
+    "putz-wischtuecher-aussenabrollung": {
+        "name": "Putz-/ Wischt\u00fccher - Au\u00dfenabrollung",
+        "id": "F46fGZyehQsYUg3NVFfYgV"
+    },
+    "schwaemme": {
+        "name": "Schw\u00e4mme",
+        "id": "U6XZHN22XpCoeNa2reciLi"
+    },
+    "putz-wischtuecher-einzeltuecher": {
+        "name": "Putz-/ Wischt\u00fccher - Einzelt\u00fccher",
+        "id": "rEhxdzuWm2KrnNA4cHvaNR"
+    },
+    "schneeschieber": {
+        "name": "Schneeschieber",
+        "id": "WrnPhoMSyT7pnAtUvAKs8S"
+    },
+    "kuechenreiniger": {
+        "name": "K\u00fcchenreiniger",
+        "id": "iPPB8w7gRtWUUqBT3E8VR3"
+    },
+    "holzpflege-reiniger": {
+        "name": "Holzpflege/ -reiniger",
+        "id": "uoa6nxgqJR8nzhGmNPrsZF"
+    },
+    "handtuecher": {
+        "name": "Handt\u00fccher",
+        "id": "HuUQbTfYF6LzxHqLCmaYzU"
+    },
+    "spendersysteme": {
+        "name": "Spendersysteme",
+        "id": "DpFpraGBUdmQFgYXcbgnek"
+    },
+    "putz-wischtuecher-innenabrollung": {
+        "name": "Putz-/ Wischt\u00fccher - Innenabrollung",
+        "id": "psSqXGxzWtzoHzLFBCG5nG"
+    },
+    "geraetereiniger": {
+        "name": "Ger\u00e4tereiniger",
+        "id": "UyFCmHe4KYNfd7t9ysKjX9"
+    },
+    "microfasertuecher": {
+        "name": "Microfasert\u00fccher",
+        "id": "ugHLMEN6d4rTBPoNAmwBUE"
+    },
+    "sonstige-reinigungschemie": {
+        "name": "Sonstige Reinigungschemie",
+        "id": "94KGBGwDuoPN5z3YyEdr7P"
+    },
+    "eimer": {
+        "name": "Eimer",
+        "id": "SzgQcwFrQSuDfrvaEDBnnK"
+    },
+    "desinfektionswaschmittel": {
+        "name": "Desinfektionswaschmittel",
+        "id": "3xGW8uQrgohv7wo8xnzrdG"
+    },
+    "wasserenthaertung": {
+        "name": "Wasserenth\u00e4rtung",
+        "id": "DPGc6oc3DJWSDxZD9tgEcm"
+    },
+    "flaschenbuersten": {
+        "name": "Flaschenb\u00fcrsten",
+        "id": "i5E32c2CyQAqXVgJ5WtQjP"
+    },
+    "stahlwolle": {
+        "name": "Stahlwolle",
+        "id": "c47z6evC6UnMzLkHHPg6u9"
+    },
+    "staubtuecher": {
+        "name": "Staubt\u00fccher",
+        "id": "A8QeHNA56eE7F9cSuQVhKR"
+    },
+    "nagelbuersten": {
+        "name": "Nagelb\u00fcrsten",
+        "id": "ZG8SRVruE6HSJ7iLn3W8EP"
+    },
+    "rohrreiniger": {
+        "name": "Rohrreiniger",
+        "id": "Ld7NStBGrRCXNx9qLjXyqi"
+    },
+    "reinigungskissen-topfball": {
+        "name": "Reinigungskissen/ Topfball",
+        "id": "FSfqcog4PGFF7BhA6wgiRH"
+    },
+    "fein-buntwaschmittel": {
+        "name": "Fein-/ Buntwaschmittel",
+        "id": "EECjV73AUp7XHrWwBQCGHh"
+    },
+    "besen": {
+        "name": "Besen",
+        "id": "sBXeRK4tcQBm7d3SDSuo7M"
+    },
+    "geraetehalter": {
+        "name": "Ger\u00e4tehalter",
+        "id": "pABaQw6ns24KccgXshKF2A"
+    },
+    "destilliertes-wasser": {
+        "name": "Destilliertes Wasser",
+        "id": "F95uBY73B9JHGicJyTsP4T"
+    },
+    "schrubber-wischer": {
+        "name": "Schrubber/ Wischer",
+        "id": "XNWMVM4T664DVrCHuwpCjQ"
+    },
+    "graffitientferner": {
+        "name": "Graffitientferner",
+        "id": "Ee4B2HsTR8rtDjckNuJCXL"
+    },
+    "vollwaschmittel-alleinwaschmittel": {
+        "name": "Vollwaschmittel/ Alleinwaschmittel",
+        "id": "haa24DGu2nTFkNRkiDs8mk"
+    },
+    "topfreiniger": {
+        "name": "Topfreiniger",
+        "id": "LSaQkfNcEwS7tYCxcwpYcR"
+    },
+    "stielbuersten": {
+        "name": "Stielb\u00fcrsten",
+        "id": "L85ZrJWBWLNWe37q75LyQa"
+    },
+    "scheuerbuersten": {
+        "name": "Scheuerb\u00fcrsten",
+        "id": "tBn73YvFkDDk9LmFqoLbph"
+    },
+    "staubwedel": {
+        "name": "Staubwedel",
+        "id": "KJtQbpdmqiA7SvYFcYAkQJ"
+    },
+    "besen-und-schrubberstiele": {
+        "name": "Besen- und Schrubberstiele",
+        "id": "jZWkz5SnBTvHXa5tTPtUNb"
+    },
+    "toilettenbuersten-garnituren": {
+        "name": "Toilettenb\u00fcrsten/ -garnituren",
+        "id": "waEC2j7GQjb9kwEtbvpYLd"
+    },
+    "staub-fussschutz": {
+        "name": "Staub-Fu\u00dfschutz",
+        "id": "QhCM94DC2ksBq4oTqeZ9tU"
+    },
+    "spezialwaschmittel": {
+        "name": "Spezialwaschmittel",
+        "id": "dfsMnNswhPA6tHMmpmT2oK"
+    },
+    "klassischer-papierkorb": {
+        "name": "klassischer Papierkorb",
+        "id": "7hxPsJEChupo7UWW7JCXQN"
+    },
+    "wischpflege": {
+        "name": "Wischpflege",
+        "id": "axwgQ9VwrwBYWYLCkp2oKj"
+    },
+    "spezialgeraete-fensterreinigungsset": {
+        "name": "Spezialger\u00e4te/ Fensterreinigungsset",
+        "id": "FCQKWttcpJwLLa3VBSspib"
+    },
+    "wischerschienen-griffe-gummis": {
+        "name": "Wischerschienen/ -griffe/ -gummis",
+        "id": "A6jVyoWMpPg732PHsvTS94"
+    },
+    "spuelbuersten": {
+        "name": "Sp\u00fclb\u00fcrsten",
+        "id": "pMbPXSzqnm6arf5bFPTJub"
+    },
+    "schmierseife": {
+        "name": "Schmierseife",
+        "id": "iHzBpEdeasWaSvVKquWTYA"
+    },
+    "detachiermittel": {
+        "name": "Detachiermittel",
+        "id": "zw8cLx62RypjKpyLBjpLXh"
+    },
+    "sonstige-buersten": {
+        "name": "Sonstige B\u00fcrsten",
+        "id": "34Xpa3Lx2AUJqamFdY9FW"
+    },
+    "teleskopstangen-zubehoer": {
+        "name": "Teleskopstangen/ Zubeh\u00f6r",
+        "id": "CcmTqqTnUsxGMhyYRvgBF3"
+    },
+    "strickhandschuh": {
+        "name": "Strickhandschuh",
+        "id": "md2j3s4qszX2Wn3PJgM3A5"
+    },
+    "kuechenrollen": {
+        "name": "K\u00fcchenrollen",
+        "id": "nCRt6NH5ztxx2pLu5ccPRD"
+    },
+    "handseife-fluessig": {
+        "name": "Handseife fl\u00fcssig",
+        "id": "8d2gG5bofEDvgtAfYteYA8"
+    },
+    "einwascher-traeger": {
+        "name": "Einwascher/ Tr\u00e4ger",
+        "id": "g3tcPzfvRQe4TyjgHWkzT5"
+    },
+    "kehrgarnituren": {
+        "name": "Kehrgarnituren",
+        "id": "2dz9sNW8q5Wv3kDCkruhBG"
+    },
+    "kehrmehle": {
+        "name": "Kehrmehle",
+        "id": "MedcoqWQumivmdMNprEZA5"
+    },
+    "spachteln": {
+        "name": "Spachteln",
+        "id": "TGxJ4zig8tYSCA4usmxjjN"
+    },
+    "spuelreiniger-fluessig": {
+        "name": "Sp\u00fclreiniger, fl\u00fcssig",
+        "id": "2LbWXLxfmQTZVC459aAAkD"
+    },
+    "boden-fensterschaber": {
+        "name": "Boden-/ Fensterschaber",
+        "id": "45SqqdhWgxoJStmukW59Uo"
+    },
+    "hotelkosmetik-und-accessoires": {
+        "name": "Hotelkosmetik und Accessoires",
+        "id": "CScRNAooqPg94uZGbcEaFN"
+    },
+    "spueltabs": {
+        "name": "Sp\u00fcltabs",
+        "id": "H67PEbm2TmQzVCJeruo7cU"
+    },
+    "haut-und-haarreinigung": {
+        "name": "Haut- und Haarreinigung",
+        "id": "bGKCzRLY3vJjHyH44uoqVa"
+    },
+    "pulverreiniger": {
+        "name": "Pulverreiniger",
+        "id": "rXLuAjVAqU2FDjwSGLNJYk"
+    },
+    "hautpflege": {
+        "name": "Hautpflege",
+        "id": "TXbLmDY5ssHiaGecAhSgTX"
+    },
+    "allround-handschuh": {
+        "name": "Allround-Handschuh",
+        "id": "Q6ML46zirVxhdjWZ8LdZSX"
+    },
+    "superpads": {
+        "name": "Superpads",
+        "id": "EG8rjeRcL2tQoprhcGsyvc"
+    },
+    "wasserschieber": {
+        "name": "Wasserschieber",
+        "id": "552EPqem2o7X9HGbioWKH9"
+    },
+    "scheuerschwaemme": {
+        "name": "Scheuerschw\u00e4mme",
+        "id": "ofrHL6fTipQeBUgMDGUsFj"
+    },
+    "kaffeemaschinenreiniger": {
+        "name": "Kaffeemaschinenreiniger",
+        "id": "w6Y8fiAEsnReCFLvE7izjG"
+    },
+    "fleckensalz": {
+        "name": "Fleckensalz",
+        "id": "CtEJpC7zWzDCtn3cEZSQb9"
+    },
+    "scheuermilch-pulver": {
+        "name": "Scheuermilch/ -pulver",
+        "id": "ZheWTgBXTwzK3JgWeFbtaH"
+    },
+    "waschkraftverstaerker": {
+        "name": "Waschkraftverst\u00e4rker",
+        "id": "N9bWJ5AoB5CStqZjTqqKgi"
+    },
+    "backofen-grill-und-konvektomatenreiniger": {
+        "name": "Backofen-/ Grill und Konvektomatenreiniger",
+        "id": "5MFBwKbaJSchoT9N8WfQEo"
+    },
+    "entkalker": {
+        "name": "Entkalker",
+        "id": "AbRJu3QBJmLn9DYWMVLExE"
+    },
+    "pflegeschwaemme": {
+        "name": "Pflegeschw\u00e4mme",
+        "id": "wPQqzcwnUk699mfBGtMN4j"
+    },
+    "fettloeser": {
+        "name": "Fettl\u00f6ser",
+        "id": "amMD5VE7smHGmrjAD43NnM"
+    },
+    "kuechendesinfektion": {
+        "name": "K\u00fcchendesinfektion",
+        "id": "fccxvULVJENc8PSA7fffMf"
+    },
+    "medical": {
+        "name": "Medical",
+        "id": "JJXk7YufRrFjfQHsu9ue3f"
+    },
+    "dosierflaschen-pistolen-pumpen-haehne": {
+        "name": "Dosierflaschen/ -pistolen/ -pumpen/ -h\u00e4hne",
+        "id": "LWp6ypzhdZywzAxpbFWpxk"
+    },
+    "tiefkuehlreiniger": {
+        "name": "Tiefk\u00fchlreiniger",
+        "id": "dm76a2xsQ5yc9e5V2er9jR"
+    },
+    "gastronomiebedarf": {
+        "name": "Gastronomiebedarf",
+        "id": "Y5QMt7ys3cCSgC3Qwrt8Qo"
+    },
+    "sonstige-schwaemme": {
+        "name": "Sonstige Schw\u00e4mme",
+        "id": "chY4tTYYgLDMevpgcrtC4D"
+    },
+    "weichspueler": {
+        "name": "Weichsp\u00fcler",
+        "id": "yqR9VZt8oiVi5EVTeWH4mR"
+    },
+    "einweg-staub-fussschutz": {
+        "name": "Einweg-Staub-Fu\u00dfschutz",
+        "id": "o9BHE6yDbFCATgUkaXbTZQ"
+    },
+    "strickhandschuh-ohne-noppen": {
+        "name": "Strickhandschuh ohne Noppen",
+        "id": "xxrsUkmoKUDAbtAsrfHTzN"
+    },
+    "arbeitssicherheit-unfallschutz": {
+        "name": "Arbeitssicherheit / Unfallschutz",
+        "id": "dWivpaiF62PKYieVxhmEDc"
+    },
+    "kehrschaufeln": {
+        "name": "Kehrschaufeln",
+        "id": "9GEG9KmbZrUvoZaimW2Jjf"
+    },
+    "shampoo": {
+        "name": "Shampoo",
+        "id": "iCgtgtGaPDYsrzjxnz3DFG"
+    },
+    "seife": {
+        "name": "Seife",
+        "id": "UKATsN8mcVyMgnLoVSk4S9"
+    },
+    "handfeger": {
+        "name": "Handfeger",
+        "id": "aRKQ922EnUNHN6akybkHH8"
+    },
+    "allround-handschuh-kategorie-i": {
+        "name": "Allround-Handschuh Kategorie I",
+        "id": "rLDV63Bs6jEVZTQYU9kvSE"
+    },
+    "sonstige-hotelkosmetik": {
+        "name": "Sonstige Hotelkosmetik",
+        "id": "UzJn5EHdkcJbmUfc3MhLbL"
+    },
+    "klarspueler": {
+        "name": "Klarsp\u00fcler",
+        "id": "EcYB6YoYKThyoZmADSpoxD"
+    },
+    "salz-fuer-enthaertungsanlagen": {
+        "name": "Salz f\u00fcr Enth\u00e4rtungsanlagen",
+        "id": "T8x8NQFSUnJsX6bvWF4QCJ"
+    },
+    "padhalter": {
+        "name": "Padhalter",
+        "id": "mMpkuQFH92kNrHDjqn3bEX"
+    },
+    "duschhauben": {
+        "name": "Duschhauben",
+        "id": "Lo7aZbuueYSKMCyCPEhKtb"
+    },
+    "aufsaugende-inko": {
+        "name": "Aufsaugende Inko",
+        "id": "pPSVSrLNEYMHwd2yua3fK3"
+    },
+    "handpads-fusspads": {
+        "name": "Handpads / Fusspads",
+        "id": "4S7TZZZJkkDnrCmsbM4jyH"
+    },
+    "waeschebeutel": {
+        "name": "W\u00e4schebeutel",
+        "id": "eEWVzxorfbVZPRLbuy5kbZ"
+    },
+    "schuhpflege": {
+        "name": "Schuhpflege",
+        "id": "23KrVWWFrqBSrJH7xDBnVH"
+    },
+    "wundbehandlung": {
+        "name": "Wundbehandlung",
+        "id": "BiMHaRd7TLsw8uHr8H6KpG"
+    },
+    "patientenversorgung": {
+        "name": "Patientenversorgung",
+        "id": "y8XhtWFjqZpV7bS3aRui5d"
+    },
+    "spezialpads": {
+        "name": "Spezialpads",
+        "id": "DPo5bcQDs3tLEXAXk5os4L"
+    },
+    "einweg-tragetaschen-und-beutel": {
+        "name": "Einweg-Tragetaschen und Beutel",
+        "id": "DpPHjzze92nFuEaaqC7f96"
+    },
+    "pants": {
+        "name": "Pants",
+        "id": "8JZHNcEhqph6wA3qPbBCvk"
+    },
+    "einlagen": {
+        "name": "Einlagen",
+        "id": "uQB5CuDrt6ePPozBpeZC98"
+    },
+    "einweg-tabletop": {
+        "name": "Einweg-Tabletop",
+        "id": "Smk7s3YdyCQPNxA4UK7bgF"
+    },
+    "krankenunterlage": {
+        "name": "Krankenunterlage",
+        "id": "Hr9T6HJLZM7b6ed2NiDPsj"
+    },
+    "einweg-geschirr-und-besteck": {
+        "name": "Einweg-Geschirr und Besteck",
+        "id": "u7s5D3WsaKF7QkHZM9Ex4j"
+    },
+    "netz-fixierhose": {
+        "name": "Netz-/Fixierhose",
+        "id": "jLoc4u5RSwCDWQ75QNKLKJ"
+    },
+    "waschhandschuhe-waschtuecher-und-waschhauben": {
+        "name": "Waschhandschuhe, Wascht\u00fccher und Waschhauben",
+        "id": "FEwLjUGnHNXYotTE5ui2nM"
+    },
+    "verbandswatte-und-zellstoff": {
+        "name": "Verbandswatte und Zellstoff",
+        "id": "Y9mJrBGvYwhrXCeigeHrET"
+    },
+    "slip": {
+        "name": "Slip",
+        "id": "s39UghQnAQxLU9nzjPXVZi"
+    },
+    "esslaetzchen": {
+        "name": "Essl\u00e4tzchen",
+        "id": "FbpsxyzqVfp522qk42GDUG"
+    },
+    "vorlage": {
+        "name": "Vorlage",
+        "id": "GdBn8yr7GwUaRyPh8H2Drh"
+    },
+    "guertelprodukte": {
+        "name": "G\u00fcrtelprodukte",
+        "id": "ni8ReNiVnThcoTpizuDGCf"
+    },
+    "siegelrandbeutel-und-schrumpfbeutel": {
+        "name": "Siegelrandbeutel und Schrumpfbeutel",
+        "id": "f83F8rc9aShiGVxZsg9PUP"
+    },
+    "kerze": {
+        "name": "Kerze",
+        "id": "7xXAcYbetAZbSAdPByCbAR"
+    },
+    "einweg-spenderserviette": {
+        "name": "Einweg-Spenderserviette",
+        "id": "wQaTAYx2Y8g5X7iAgMazPT"
+    },
+    "einweg-folien-und-papiere": {
+        "name": "Einweg-Folien und Papiere",
+        "id": "AG4bHUfYhhym8hZu9RzPjS"
+    },
+    "einweg-tischdecke-und-tischdeckenrolle": {
+        "name": "Einweg-Tischdecke und Tischdeckenrolle",
+        "id": "9ycqA9ayNyWUPsFY9KbgjX"
+    },
+    "seitenfaltenbeutel-papier": {
+        "name": "Seitenfaltenbeutel Papier",
+        "id": "dxJsR28gSFa4Pm85iWKppc"
+    },
+    "einweg-geschirr-papier": {
+        "name": "Einweg-Geschirr Papier",
+        "id": "a7Vt6BmYvDZUGQdwnfTPtc"
+    },
+    "spritzbeutel": {
+        "name": "Spritzbeutel",
+        "id": "LKQUjUwH3uPZhZhUj5ey3h"
+    },
+    "einweg-serviette-premium": {
+        "name": "Einweg-Serviette Premium",
+        "id": "qvtf2c43QXFJR4XM96gEt9"
+    },
+    "abrissbeutel-ohne-griff-kunststoff": {
+        "name": "Abrissbeutel ohne Griff Kunststoff",
+        "id": "y6FkqhQzFksNDYJFXiDHVP"
+    },
+    "teelicht-und-windlicht": {
+        "name": "Teelicht und Windlicht",
+        "id": "ZvfDx7SCevWjPZVSafzq4T"
+    },
+    "gefrierbeutel-und-eiswuerfelbeutel": {
+        "name": "Gefrierbeutel und Eisw\u00fcrfelbeutel",
+        "id": "Cdzy2Gnfswdoho3ssedE96"
+    },
+    "einweg-serviette-classic": {
+        "name": "Einweg-Serviette Classic",
+        "id": "v9KL2hxVBt5CLJMaf8UsvF"
+    },
+    "einweg-mitteldecke": {
+        "name": "Einweg-Mitteldecke",
+        "id": "3RDkeCGD3pocrSa5n7dNie"
+    },
+    "einweg-untersetzer": {
+        "name": "Einweg-Untersetzer",
+        "id": "EnfffBdUoNLwjZoPoZqHnA"
+    },
+    "tortenspitze-und-plattenpapier": {
+        "name": "Tortenspitze und Plattenpapier",
+        "id": "58f4LPgrfvbdscMSuzsexJ"
+    },
+    "frischhaltefolie-pe": {
+        "name": "Frischhaltefolie PE",
+        "id": "fgw67BxNJiM5NRsDX4iWdG"
+    },
+    "erste-hilfe": {
+        "name": "Erste Hilfe",
+        "id": "DwqmjDw79m4w4FtJqxL6K8"
+    },
+    "einschlagpapier-beschichtet-zuschnitt": {
+        "name": "Einschlagpapier beschichtet Zuschnitt",
+        "id": "6aXHUqjiLvFPVLE8f56xF9"
+    },
+    "abrissbeutel-ohne-griff-ldpe-poly-abrissbeutel": {
+        "name": "Abrissbeutel ohne Griff LDPE (Poly-Abrissbeutel)",
+        "id": "H42Zy6F2DiRzFaQK7prWLY"
+    },
+    "abrissbeutel-ohne-griff-pp": {
+        "name": "Abrissbeutel ohne Griff PP",
+        "id": "JfFRLHMRM3AEbGPAASfkna"
+    },
+    "frischhaltefolie-pvc": {
+        "name": "Frischhaltefolie PVC",
+        "id": "uPpJYeHVNL5s3hjsbabcFS"
+    },
+    "alu-folie": {
+        "name": "Alu-Folie",
+        "id": "PH3rivAhX6g88ouWtHAoHP"
+    },
+    "einweg-schalen-und-verpackungsbecher": {
+        "name": "Einweg-Schalen und Verpackungsbecher",
+        "id": "vhdby34CMhS6SR5SCvSYmB"
+    },
+    "backpapier": {
+        "name": "Backpapier",
+        "id": "tKUxZe98LwtDMVuhYyakA4"
+    },
+    "frischhaltefolie-pe-ohne-box": {
+        "name": "Frischhaltefolie PE ohne Box",
+        "id": "GxeR6TRfKefXUKxN2MVx5Y"
+    },
+    "frischhaltefolie-pe-mit-box": {
+        "name": "Frischhaltefolie PE mit Box",
+        "id": "bXNQmxMpFLMJqgaMy4zvZj"
+    },
+    "erste-hilfe-verbandsmaterial": {
+        "name": "Erste Hilfe Verbandsmaterial",
+        "id": "UajwfDiqhjvbXAJiWTtQY"
+    },
+    "seitenfaltenbeutel-papier-ohne-sichtfenster": {
+        "name": "Seitenfaltenbeutel Papier ohne Sichtfenster",
+        "id": "pbc72JYN3Cgy9CYUGSEwoB"
+    },
+    "erste-hilfe-nachfuell-und-erweiterungsset": {
+        "name": "Erste Hilfe Nachf\u00fcll- und Erweiterungsset",
+        "id": "PYqYWrYQcUAx7joJ3aG7oh"
+    },
+    "frischhaltefolie-pvc-ohne-box": {
+        "name": "Frischhaltefolie PVC ohne Box",
+        "id": "zGDvs53doyRtYwT2aAGCSK"
+    },
+    "frischhaltefolie-pvc-mit-box": {
+        "name": "Frischhaltefolie PVC mit Box",
+        "id": "FNkxzxsfosXYaDcpofixBJ"
+    },
+    "alu-folie-ohne-box": {
+        "name": "Alu-Folie ohne Box",
+        "id": "9eJSnGMx4tVbWz5NNZYTFD"
+    },
+    "verpackungsbecher-kunststoff-eckig-deckel": {
+        "name": "Verpackungsbecher Kunststoff eckig Deckel",
+        "id": "YGPy5BwMmfkYK9RBWZBDE7"
+    },
+    "einweg-menueschale-und-deckel-alu": {
+        "name": "Einweg-Men\u00fcschale und Deckel Alu",
+        "id": "xsVKMcCz3NGEoZMQwZdEJF"
+    },
+    "verpackungsbecher-kunststoff-rund-deckel": {
+        "name": "Verpackungsbecher Kunststoff rund Deckel",
+        "id": "65wtG4WTxXBG8apJ2v6rKh"
+    },
+    "einweg-suppenbehaelter-und-deckel": {
+        "name": "Einweg-Suppenbeh\u00e4lter und Deckel",
+        "id": "FF9SeqX6UHU64mY2bt55pH"
+    },
+    "einweg-dressing-saucenbecher-und-deckel": {
+        "name": "Einweg-Dressing/Saucenbecher und Deckel",
+        "id": "7M8jDSV5LMmKLeXGQHrqWV"
+    },
+    "einweg-trinkbecher-und-deckel": {
+        "name": "Einweg-Trinkbecher und Deckel",
+        "id": "fL644UTrUUCkfVjvvEL4Bm"
+    },
+    "einweg-salatschale-und-deckel-kunststoff": {
+        "name": "Einweg-Salatschale und Deckel Kunststoff",
+        "id": "mDPAENKUh68tzk3buyBPNB"
+    },
+    "backpapier-und-kochpergament": {
+        "name": "Backpapier und Kochpergament",
+        "id": "QyC47vR2w4djyPpGfLj6Pk"
+    },
+    "verpackungsbecher-kunststoff-eckig": {
+        "name": "Verpackungsbecher Kunststoff eckig",
+        "id": "w6MKi2hMSfPK8PrNdcKzCK"
+    },
+    "persoenliche-schutzausruestung-psa": {
+        "name": "Pers\u00f6nliche Schutzausr\u00fcstung (PSA)",
+        "id": "dKtZskTq9kwULzbpTJkj7R"
+    },
+    "einweg-und-service-verpackung-sonstige": {
+        "name": "Einweg- und Service-Verpackung sonstige",
+        "id": "MkdWNuqyuUSMKVyTX2dZuF"
+    },
+    "verpackungsbecher-kunststoff-rund": {
+        "name": "Verpackungsbecher Kunststoff rund",
+        "id": "78YsrHSGwkvhwLJ7wJjjEb"
+    },
+    "einweg-menueschale-und-deckel-kunststoff": {
+        "name": "Einweg-Men\u00fcschale und Deckel Kunststoff",
+        "id": "gNjL4b84f8s8cfbhqXEMr8"
+    },
+    "einweg-menueschale-alu-deckel": {
+        "name": "Einweg-Men\u00fcschale Alu Deckel",
+        "id": "MG6pMcSNBs6WFw2kC9wd4X"
+    },
+    "einweg-suppenbehaelter-und-deckel-kunststoff": {
+        "name": "Einweg-Suppenbeh\u00e4lter und Deckel Kunststoff",
+        "id": "L5bNMgRXZNzoKXApCyMknR"
+    },
+    "einweg-becherhalter": {
+        "name": "Einweg-Becherhalter",
+        "id": "Sd2av4bfWYgqMsA2qQWnR"
+    },
+    "einweg-dressing-saucenbecher-kunststoff": {
+        "name": "Einweg-Dressing/Saucenbecher Kunststoff",
+        "id": "egAsnn76KCyiexomnhunRW"
+    },
+    "kaltgetraenkebecher-kunststoff-tiefgezogen": {
+        "name": "Kaltgetr\u00e4nkebecher Kunststoff tiefgezogen",
+        "id": "9nyEGxNcBhTSP4oeFQTfEW"
+    },
+    "heissgetraenkebecher-kunststoff": {
+        "name": "Heissgetr\u00e4nkebecher Kunststoff",
+        "id": "92K2sMu2oEeSYxnarHWkMc"
+    },
+    "einweg-dressing-saucenbecher-deckel-kunststoff": {
+        "name": "Einweg-Dressing/Saucenbecher Deckel Kunststoff",
+        "id": "jYADWycgmZubSgbb5EATHT"
+    },
+    "heissgetraenkebecher-deckel-nachhaltig": {
+        "name": "Heissgetr\u00e4nkebecher Deckel nachhaltig",
+        "id": "Qn5k2nCzmHqs97C2uoCkyj"
+    },
+    "einweg-salatschale-kunststoff-deckel-und-einsatz": {
+        "name": "Einweg-Salatschale Kunststoff Deckel und Einsatz",
+        "id": "Tn4K4EcoCh9zmgWw9CjG9M"
+    },
+    "kaltgetraenkebecher-papier": {
+        "name": "Kaltgetr\u00e4nkebecher Papier",
+        "id": "FZcrA6ytyXWXpeSsTvb2cB"
+    },
+    "verpackungsbecher-kunststoff-eckig-mit-deckel": {
+        "name": "Verpackungsbecher Kunststoff eckig mit Deckel",
+        "id": "6xM35LqsBFmrfjP7ku95ih"
+    },
+    "heissgetraenkebecher-deckel": {
+        "name": "Heissgetr\u00e4nkebecher Deckel",
+        "id": "qHZDDASQdeT8xs3ZSgFf6A"
+    },
+    "verpackungsbecher-kunststoff-eckig-ohne-deckel": {
+        "name": "Verpackungsbecher Kunststoff eckig ohne Deckel",
+        "id": "i7Nt6BYqxuACYdz9LkQHeU"
+    },
+    "kaffeefilter-und-teefilter": {
+        "name": "Kaffeefilter und Teefilter",
+        "id": "i5TcH9RtRfY26eMXcDYc3G"
+    },
+    "bad-und-wc": {
+        "name": "Bad und WC",
+        "id": "v4mjhABvLNBHRMb7NLqBZT"
+    },
+    "verpackungsbecher-kunststoff-rund-ohne-deckel": {
+        "name": "Verpackungsbecher Kunststoff rund ohne Deckel",
+        "id": "r669D8ymxjGqkSfsiddEhm"
+    },
+    "brennmittel": {
+        "name": "Brennmittel",
+        "id": "xwQHKPB6w5mc3dWrHiJZth"
+    },
+    "heissgetraenkebecher-papier-doppelwand": {
+        "name": "Heissgetr\u00e4nkebecher Papier Doppelwand",
+        "id": "NG6Xj7GanUdi2GTqTq4bHS"
+    },
+    "heissgetraenkebecher-papier-einwand": {
+        "name": "Heissgetr\u00e4nkebecher Papier Einwand",
+        "id": "P58gEZJ7RTd59uRd5Hxhfa"
+    },
+    "einweg-menueschale-kunststoff": {
+        "name": "Einweg-Men\u00fcschale Kunststoff",
+        "id": "Z7Hu5c6okizwqgxeLNb94G"
+    },
+    "einweg-salatschale-kunststoff-mit-deckel-anhaengend": {
+        "name": "Einweg-Salatschale Kunststoff mit Deckel anh\u00e4ngend",
+        "id": "ZEV2ULMRfsiwYGvP4vAJoZ"
+    },
+    "koerperschutz": {
+        "name": "K\u00f6rperschutz",
+        "id": "iJ5E8uaeXzEeWUiJzHfaC5"
+    },
+    "kaltgetraenkebecher-tiefgezogen-pp": {
+        "name": "Kaltgetr\u00e4nkebecher tiefgezogen PP",
+        "id": "iULtB4EoS4EguXPxmyEnPA"
+    },
+    "kaltgetraenkebecher-tiefgezogen-ps": {
+        "name": "Kaltgetr\u00e4nkebecher tiefgezogen PS",
+        "id": "HNf8w64Mm4NTMSGJ8nJfBd"
+    },
+    "heissgetraenkebecher-deckel-mit-trinkloch": {
+        "name": "Heissgetr\u00e4nkebecher Deckel mit Trinkloch",
+        "id": "CcqpxsdDZ4zbwnZSrxLZP8"
+    },
+    "heissgetraenkebecher-papier-mehrwand": {
+        "name": "Heissgetr\u00e4nkebecher Papier Mehrwand",
+        "id": "YVMo2mg9Av7W8epHar3Cod"
+    },
+    "bademaentel": {
+        "name": "Badem\u00e4ntel",
+        "id": "NQzhycW2Xwp6zN9ATKLEU3"
+    },
+    "einweg-koerperschutz": {
+        "name": "Einweg-K\u00f6rperschutz",
+        "id": "NReqX9h4ARToGNqGFuFboV"
+    },
+    "hotelslipper": {
+        "name": "Hotelslipper",
+        "id": "naJHchyUUJZAiBXPkH7vrW"
+    },
+    "einweg-schutz-gegen-schmutz-maentel-kittel-schuerzen": {
+        "name": "Einweg-Schutz gegen Schmutz - M\u00e4ntel Kittel Sch\u00fcrzen",
+        "id": "MJgjRbQ6b9Ec6kgHMDTbFe"
+    },
+    "einweg-schutz-gegen-schmutz-anzuege-jacken-hosen": {
+        "name": "Einweg-Schutz gegen Schmutz - Anz\u00fcge Jacken Hosen",
+        "id": "knNohN9MVstLdnecXUvNTF"
+    },
+    "einweghandschuh": {
+        "name": "Einweghandschuh",
+        "id": "H8Z6aP4sQNatyFnc7XYyVK"
+    },
+    "untersuchungshandschuh-und-fingerling": {
+        "name": "Untersuchungshandschuh und -Fingerling",
+        "id": "xoPN3t58Ay3qwwmkoKbKYR"
+    },
+    "mechanikhandschutz": {
+        "name": "Mechanikhandschutz",
+        "id": "owaQjxb6E29xTdEyy2SN2f"
+    },
+    "chemikalienhandschutz": {
+        "name": "Chemikalienhandschutz",
+        "id": "obkSX6w2eWQxRApB6B9iYQ"
+    },
+    "einweghandschuh-aus-nitril": {
+        "name": "Einweghandschuh aus Nitril",
+        "id": "9xAosBb4W9iCzUzRYKMpQY"
+    },
+    "untersuchungshandschuh-unsteril-latex-puderfrei": {
+        "name": "Untersuchungshandschuh unsteril Latex puderfrei",
+        "id": "LBRVHrw8EC6FxdxeWszaEP"
+    },
+    "untersuchungshandschuh-unsteril-vinyl-puderfrei": {
+        "name": "Untersuchungshandschuh unsteril Vinyl puderfrei",
+        "id": "PFSKseyFCXXDPfyY9t2E5Q"
+    },
+    "untersuchungshandschuh-unsteril-nitril-puderfrei": {
+        "name": "Untersuchungshandschuh unsteril Nitril puderfrei",
+        "id": "g5qNTa3rWxTyWv8BzsH2mS"
+    },
+    "mechanikschutz-schnittschutzlevel-1": {
+        "name": "Mechanikschutz-Schnittschutzlevel 1",
+        "id": "VZBLrKBkEwmBWhhQN74QWW"
+    },
+    "chemikalienhandschutz-ohne-traegermaterial": {
+        "name": "Chemikalienhandschutz ohne Tr\u00e4germaterial",
+        "id": "CcU9NEgvWfY5Egi9YYboPD"
+    },
+    "chemikalienhandschutz-mit-traegermaterial": {
+        "name": "Chemikalienhandschutz mit Tr\u00e4germaterial",
+        "id": "LYsQDx6d7xiTkH4KZem47Q"
+    },
+    "wc-reiniger": {
+        "name": "WC-Reiniger",
+        "id": "n3GyFHCi6eoNvxGduypfSX"
+    }
+}
