@@ -70,7 +70,7 @@ async def gather_all_categories(api_url: str, category_id: str) -> dict:
             count=count
         )
     
-    print(f'There has been gathered {count} categories') #483
+    logger.info(f'There has been gathered {count} categories') #483
 
     return gathered_categories
 
@@ -83,42 +83,55 @@ def get_products_link(api_url: str, limit: int, page: int, category_id: str) -> 
     return f'{api_url}/products?limit={limit}&page={page}&filter%5Btaxonomy%5D={category_id}&requiresAggregations=0&track=1'
 
 
-async def get_items_links_one_category(gathered_links: dict, category_id: str, api_url: str, session: aiohttp.ClientSession, page, count) -> None:
+def handle_items_json(items: json) -> list:
+    links_list = []
+    try:
+        for item in items['hits']:
+            mainVariant = item['mainVariant']
+            intermediate_dict = {
+                "item_id": mainVariant['id'],
+                "item_slug": mainVariant['slug'],
+                "wasScraped": False,
+            }
+            links_list.append(intermediate_dict)
+    except KeyError:
+        logger.error('Cant handle fields in items JSON')
+
+    return links_list
+
+
+async def get_items_links_one_category(gathered_links: dict, category_id: str, api_url: str, session: aiohttp.ClientSession, page) -> None:
     next_page = page + 1
     limit = 20
     items_by_category_url = get_products_link(api_url, limit, next_page, category_id)
     async with session.get(items_by_category_url) as response:
-        
-        if response.headers['Content-Type'] == 'text/plain':
-            items = await response.json(content_type='text/plain')
-        items = await response.json()
+        try:
+            items = await response.json()
+        except:
+            logger.error('Cant cast response to JSON from {items_by_category_url} URL')
         try:
             pages = round(items['total']/limit)
-            if page <= pages:
-                intermediate_dict = {
-                    category_id: []
-                }
-                for item in items['hits']:
-                    count[0] += 1
-                    item = item['mainVariant']
-                    intermediate_dict[category_id].append(
-                        {
-                            "item_id": item['id'],
-                            "item_slug": item['slug'],
-                            "wasScraped": False,
-                        }
-                    )
-                gathered_links.update(intermediate_dict)
-            
-                await get_items_links_one_category(gathered_links, category_id, api_url, session, next_page, count)
-        except Exception:
-            logger.error(f'URL: {items_by_category_url}, doesn`t work')
+        except KeyError:
+            logger.error(f'Cant get total field in JSON from {items_by_category_url} URL')
             #put bad link to different field in gathered_links dict
-            gathered_links['bad_links'].append(items_by_category_url)
+        gathered_links['bad_links'].append(items_by_category_url)
+        if gathered_links.get(category_id) is None:
+            gathered_links[category_id] = {"links": []}
+            gathered_links[category_id]["total_items_count"] = items['total']
+            gathered_links[category_id]["gathered_items_count"] = 0
+
+        if page <= pages:
+            links_list = handle_items_json(items)
+            gathered_links[category_id]["links"].extend(links_list)                    
+            gathered_links[category_id]["gathered_items_count"] += 1
+
+        await get_items_links_one_category(gathered_links, category_id, api_url, session, next_page)
+
+    logger.info(f'Complete {category_id} category')
 
 async def get_items_links_all_caregories(api_url: str, gathered_categories: dict, limit: int, page: int) -> dict:
     count=[0]
-    gathered_links = {"bad_links": []}
+    gathered_links = {"bad_links": [],}
     async with aiohttp.ClientSession() as session:
         tasks = [
             get_items_links_one_category(
@@ -127,13 +140,12 @@ async def get_items_links_all_caregories(api_url: str, gathered_categories: dict
                 api_url=api_url, 
                 session=session, 
                 page=page, 
-                count=count,
             )
             for category_id in get_items_id(gathered_categories)
         ]
         await asyncio.gather(*tasks)
 
-    logger.info(f'There has been gotten {count} links by all categories')
+    logger.info(f'There has been given {count} links by all categories')
     return gathered_links
          
 
