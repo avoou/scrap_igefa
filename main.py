@@ -3,7 +3,7 @@ import aiohttp
 import asyncio
 import json
 import os
-
+import logging
 
 #TODO:
 #repair json to be pandas df with all scrap categories
@@ -18,6 +18,11 @@ import os
 #https://api.igefa.de/shop/v1/products/by-variant/XVznJhi5M3mqCyBt2XKdr3
 #https://api.igefa.de/shop/v1/products?filter%5Btaxonomy%5D=UZ58DPNjGf6axF3MRtAw6Q
 #https://api.igefa.de/shop/v1/products?limit=20&page=1&filter%5Btaxonomy%5D=UZ58DPNjGf6axF3MRtAw6Q&requiresAggregations=0&track=1
+
+
+logger = logging.getLogger()
+logging.basicConfig(level=logging.INFO)
+
 
 TARGET_URL = 'https://store.igefa.de'
 CATEGORIES_API_ID = 'f4SXre6ovVohkGNrAvh3zR'
@@ -83,29 +88,37 @@ async def get_items_links_one_category(gathered_links: dict, category_id: str, a
     limit = 20
     items_by_category_url = get_products_link(api_url, limit, next_page, category_id)
     async with session.get(items_by_category_url) as response:
-        count[0] += 1
+        
+        if response.headers['Content-Type'] == 'text/plain':
+            items = await response.json(content_type='text/plain')
         items = await response.json()
-        intermediate_dict = {
-            category_id: []
-        }
-        for item in items['hits']:
-            item = item['mainVariant']
-            intermediate_dict[category_id].append(
-                {
-                    "item_id": item['id'],
-                    "item_slug": item['slug'],
-                    "wasScraped": False,
+        try:
+            pages = round(items['total']/limit)
+            if page <= pages:
+                intermediate_dict = {
+                    category_id: []
                 }
-            )
-        gathered_links.update(intermediate_dict)
-        pages = round(items['total']/limit)
-        if page <= pages:
-            await get_items_links_one_category(category_id, api_url, session, next_page)
-
+                for item in items['hits']:
+                    count[0] += 1
+                    item = item['mainVariant']
+                    intermediate_dict[category_id].append(
+                        {
+                            "item_id": item['id'],
+                            "item_slug": item['slug'],
+                            "wasScraped": False,
+                        }
+                    )
+                gathered_links.update(intermediate_dict)
+            
+                await get_items_links_one_category(gathered_links, category_id, api_url, session, next_page, count)
+        except Exception:
+            logger.error(f'URL: {items_by_category_url}, doesn`t work')
+            #put bad link to different field in gathered_links dict
+            gathered_links['bad_links'].append(items_by_category_url)
 
 async def get_items_links_all_caregories(api_url: str, gathered_categories: dict, limit: int, page: int) -> dict:
     count=[0]
-    gathered_links = {}
+    gathered_links = {"bad_links": []}
     async with aiohttp.ClientSession() as session:
         tasks = [
             get_items_links_one_category(
@@ -120,14 +133,14 @@ async def get_items_links_all_caregories(api_url: str, gathered_categories: dict
         ]
         await asyncio.gather(*tasks)
 
-    print(f'There has been gathered {count} links by all categories')
+    logger.info(f'There has been gotten {count} links by all categories')
     return gathered_links
          
 
 
 
 async def main():
-    print("Step: 1 \nGathering all categories of items...")
+    logger.info("Step: 1 \nGathering all categories of items...")
 
     gathered_categories_filename = 'gathered_categories.json'
     gathered_links_filename = 'gathered_links.json'
@@ -139,14 +152,17 @@ async def main():
         )
         async with aiofiles.open(gathered_categories_filename, 'w') as f:
             await f.write(json.dumps(gathered_categories, ensure_ascii=False))
-    print(f'Step: 2 \nSave list of gategories to a {gathered_categories_filename} file')
+
+    logger.info('Using already existed file with categories')
+
+    logger.info(f'Step: 2 \nSave list of gategories to a {gathered_categories_filename} file')
     
-    print("Step: 3 \nGetting links of items by category")
+    logger.info("Step: 3 \nGetting links of items by category")
     
     with open(gathered_categories_filename, 'r') as f:
         gathered_categories = json.load(f)
 
-    gathered_links = get_items_links_all_caregories(
+    gathered_links = await get_items_links_all_caregories(
         api_url=API_URL, 
         gathered_categories=gathered_categories, 
         limit=LIMIT_ITEMS_COUNT_ON_PAGE,
@@ -155,7 +171,7 @@ async def main():
 
     async with aiofiles.open(gathered_links_filename, 'w') as f:
             await f.write(json.dumps(gathered_links, ensure_ascii=False))
-    print(f'Step: 3 \nSave list of gategories to a {gathered_links_filename} file')
+    logger.info(f'Step: 3 \nSave list of gategories to a {gathered_links_filename} file')
 
 
 
