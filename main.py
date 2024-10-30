@@ -37,7 +37,8 @@ GATHERED_ITEMS_LINKS_COLUMNS = {
     "category_id": "INTEGER",
     "link": "TEXT",
     "total_items_count": "INTEGER",
-    "gathered_items_count": "INTEGER"
+    "gathered_items_count": "INTEGER",
+    "wasScraped" : "INTEGER"
 }
 
 
@@ -45,6 +46,12 @@ async def create_db_table_if_not_exist(db_name: str, table_name: str, columns: d
     async with aiosqlite.connect(db_name) as db:
         columns = ', '.join([f'{name} {column_type}' for name, column_type in columns.items()])
         await db.execute(f"CREATE TABLE IF NOT EXISTS {table_name} ({columns})")
+        await db.commit()
+
+
+async def make_query_to_db(db_name: str, query: str):
+    async with aiosqlite.connect(db_name) as db:
+        await db.execute(query)
         await db.commit()
 
 
@@ -107,12 +114,13 @@ async def get_items_json(session: aiohttp.ClientSession, items_by_category_url: 
             items = await response.json()
         except:
             items={}
-            #logger.error(f'Cant cast response to JSON from {items_by_category_url} URL')
         try:
             pages = round(items['total']/limit)
+            if pages < 0:
+                pages = 1
         except KeyError:
-            pages = 1
-            #logger.error(f'Cant get total field in JSON from {items_by_category_url} URL')
+            pages = 0
+            logger.error(f'Cant get JSON from {items_by_category_url} URL')
     
     return items, pages
 
@@ -127,68 +135,91 @@ async def write_links_to_db(items: dict, category_id: str, api_url: str):
         for item in items['hits']:
             mainVariant = item['mainVariant']
             link = make_item_link(api_url, mainVariant['id'], mainVariant['slug'])
-            row = (category_id, link, items['total'], 1)
+            row = (category_id, link, items['total'], 1, 0)
             gathered_links_rows.append(row)
     except KeyError:
         return
         #logger.error('Cant handle fields in items JSON')
-    print(gathered_links_rows[-1])
+    #print(gathered_links_rows[-1])
     async with aiosqlite.connect(GATHERED_ITEMS_LINKS_DB) as db:
+        columns = ', '.join([f'{name}' for name, _ in GATHERED_ITEMS_LINKS_COLUMNS.items()])
+        values = ', '.join([f'?' for _ in GATHERED_ITEMS_LINKS_COLUMNS.keys()])
         query = f"""
-            INSERT INTO {GATHERED_ITEMS_LINKS_TABLE_NAME} (category_id, link, total_items_count, gathered_items_count)
-            VALUES (?, ?, ?, ?)
+            INSERT INTO {GATHERED_ITEMS_LINKS_TABLE_NAME} ({columns})
+            VALUES ({values})
         """
         await db.executemany(query, gathered_links_rows)
         await db.commit()
     
 
-async def get_items_links_one_category(category_id: str, api_url: str, session: aiohttp.ClientSession) -> None:
+async def get_items_links_one_category(category_id: str, api_url: str, session: aiohttp.ClientSession, page: int) -> None:
+    
     limit = LIMIT_ITEMS_COUNT_ON_PAGE
-    first_page = 1
-    items_by_category_url = get_products_link(api_url, limit, first_page, category_id)
+    items_by_category_url = get_products_link(api_url, limit, page, category_id)
     items, pages = await get_items_json(session, items_by_category_url, limit)
     if items:
+        logger.info(f"Process {category_id} category_id ... \nThere are {pages - page} pages")
         await write_links_to_db(items, category_id, api_url)
     
-    for page in range(2, pages):
-        #print(items_by_category_url)
-        items_by_category_url = get_products_link(api_url, limit, page, category_id)
-        items, pages = await get_items_json(session, items_by_category_url, limit)
-        if items:
-            await write_links_to_db(items, category_id, api_url)
+    if page < pages:
+        for page in range(page+1, pages+1):
+            #print(items_by_category_url)
+            items_by_category_url = get_products_link(api_url, limit, page, category_id)
+            items, pages = await get_items_json(session, items_by_category_url, limit)
+            if items:
+                await write_links_to_db(items, category_id, api_url)
 
 
-async def get_items_links_all_caregories(scraped_categories: dict, api_url: str, gathered_categories: dict,) -> dict:
-
+async def get_items_links_all_caregories(categories: dict, api_url: str) -> dict:
+    
     async with aiohttp.ClientSession() as session:
         tasks = [
             get_items_links_one_category(
                 category_id=category_id, 
                 api_url=api_url, 
-                session=session, 
+                session=session,
+                page=next_page
             )
-            for category_id in get_items_id(gathered_categories)
-            if category_id not in scraped_categories
+            for category_id, next_page in categories.items()
         ]
         #logger.info(f'There are {len(tasks)} tasks')
         await asyncio.gather(*tasks)
 
-         
-import jsonlines
-def get_scraped_categories(gathered_links_filename: str) -> dict:
-    scraped_categories = {}
-    with jsonlines.open(gathered_links_filename, mode='r') as reader:
-        for obj in reader:
-            scraped_categories[list(obj.keys())[0]] = True
+{
+    "AjPEJ5AjiEqXBLVWPcjzFB": 1
+}
 
-    return scraped_categories
+
+async def prepare_categories(categories: list) -> dict:
+    category_ids = ', '.join([f'"{category}"' for category in categories])
+    count_of_categories_query = f"""
+    SELECT category_id, total_items_count AS total_count, COUNT(*) AS link_count
+    FROM {GATHERED_ITEMS_LINKS_TABLE_NAME}
+    WHERE category_id IN ({category_ids})
+    GROUP BY category_id
+    """
+
+    async with aiosqlite.connect(GATHERED_ITEMS_LINKS_DB) as db:
+        async with db.execute(count_of_categories_query) as cursor:
+            category_counts = await cursor.fetchall()
+    
+    already_scraped_categories = {}
+    
+    for category_id, total_count, link_count in category_counts:
+        current_processed_pages = int(link_count / LIMIT_ITEMS_COUNT_ON_PAGE)
+        already_scraped_categories[category_id] = current_processed_pages
+    
+    for category in categories:
+        if category not in already_scraped_categories:
+            already_scraped_categories[category] = 1
+    
+    return already_scraped_categories
 
 
 async def main():
     logger.info("Step: 1 \nGathering all categories of items...")
 
     gathered_categories_filename = 'gathered_categories.json'
-    #gathered_links_filename = 'gathered_links.jsonl'
 
     if not os.path.exists(gathered_categories_filename):
         gathered_categories = await gather_all_categories(
@@ -204,13 +235,14 @@ async def main():
     
     logger.info("Step: 3 \nGetting links of items by category")
     
-    with open(gathered_categories_filename, 'r') as f:
-        gathered_categories = json.load(f)
+    async with aiofiles.open(gathered_categories_filename, 'r') as f:
+        contents = await f.read()
+        gathered_categories = json.loads(contents)
 
-    #get all categories id
-    #if file db exist then sort all categories wich done (already_scraped_categories dict)
-    #already_scraped_categories = get_scraped_categories(gathered_links_filename)
-    already_scraped_categories = {}
+    logger.info("Prepare ctagories need to be scraped")
+
+    categories = [gathered_categories[category]["id"] for category in gathered_categories]
+    already_scraped_categories = await prepare_categories(categories)
 
     await create_db_table_if_not_exist(
         GATHERED_ITEMS_LINKS_DB, 
@@ -219,9 +251,8 @@ async def main():
     )
 
     await get_items_links_all_caregories(
-        scraped_categories=already_scraped_categories,
+        categories=already_scraped_categories,
         api_url=API_URL, 
-        gathered_categories=gathered_categories, 
     )
 
 
