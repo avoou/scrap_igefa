@@ -5,17 +5,7 @@ import aiosqlite
 import json
 import os
 import logging
-#import sqlite3
 
-#TODO:
-#repair json to be pandas df with all scrap categories
-#scraped | name | slug | id |
-# False  | "name"| ...
-# 
-# gather all category links
-# filter wich was not be scraped
-# get all items from all pages for each category 
-# update df
 
 #https://api.igefa.de/shop/v1/products/by-variant/XVznJhi5M3mqCyBt2XKdr3
 #https://api.igefa.de/shop/v1/products?filter%5Btaxonomy%5D=AjPEJ5AjiEqXBLVWPcjzFB
@@ -33,7 +23,7 @@ API_URL = 'https://api.igefa.de/shop/v1'
 LIMIT_ITEMS_COUNT_ON_PAGE= 20
 GATHERED_ITEMS_LINKS_DB = 'gathered_items_links.db'
 GATHERED_ITEMS_LINKS_TABLE_NAME = 'gathered_items_links_table'
-GATHERED_ITEMS_LINKS_COLUMNS = {
+GATHERED_ITEMS_LINKS_COLUMNS_SCHEME = {
     "category_id": "INTEGER",
     "link": "TEXT",
     "total_items_count": "INTEGER",
@@ -79,11 +69,6 @@ async def get_category(api_url: str, category_id: str, gathered_categories: dict
         gathered_categories.update(intermediate_dict) #async write to db?
         
         if categories_json.get("children"):
-            # tasks = [
-            #     get_category(api_url, child["id"], gathered_categories, session, count)
-            #     for child in categories_json["children"]
-            # ]
-            # await asyncio.gather(*tasks)
             for child in categories_json["children"]:
                 await get_category(api_url, child["id"], gathered_categories, session, count)
 
@@ -136,102 +121,6 @@ def make_item_link(api_url: str, id: str, slug: str):
     return f'{api_url}/products/by-variant/{id}'
 
 
-async def write_links_to_db(items: dict, category_id: str, api_url: str):
-    gathered_links_rows = []
-    try:
-        for item in items['hits']:
-            mainVariant = item['mainVariant']
-            link = make_item_link(api_url, mainVariant['id'], mainVariant['slug'])
-            row = (category_id, link, items['total'], 1, 0)
-            gathered_links_rows.append(row)
-    except KeyError:
-        return
-        #logger.error('Cant handle fields in items JSON')
-    #print(gathered_links_rows[-1])
-    async with aiosqlite.connect(GATHERED_ITEMS_LINKS_DB) as db:
-        columns = ', '.join([f'{name}' for name, _ in GATHERED_ITEMS_LINKS_COLUMNS.items()])
-        values = ', '.join([f'?' for _ in GATHERED_ITEMS_LINKS_COLUMNS.keys()])
-        query = f"""
-            INSERT INTO {GATHERED_ITEMS_LINKS_TABLE_NAME} ({columns})
-            VALUES ({values})
-        """
-        await db.executemany(query, gathered_links_rows)
-        await db.commit()
-    
-
-async def get_items_links_one_category(category_id: str, api_url: str, session: aiohttp.ClientSession, page: int) -> None:
-    
-    limit = LIMIT_ITEMS_COUNT_ON_PAGE
-    items_by_category_url = get_products_link(api_url, limit, page, category_id)
-    items, pages = await get_items_json(session, items_by_category_url, limit)
-    if items:
-        logger.info(f"Process {category_id} category_id ... \nThere are {pages - page} pages")
-        await write_links_to_db(items, category_id, api_url)
-    
-    if page < pages:
-        for page in range(page+1, pages+1):
-            #print(items_by_category_url)
-            items_by_category_url = get_products_link(api_url, limit, page, category_id)
-            items, pages = await get_items_json(session, items_by_category_url, limit)
-            if items:
-                await write_links_to_db(items, category_id, api_url)
-
-
-async def get_items_links_all_caregories(categories: dict, api_url: str) -> dict:
-    
-    async with aiohttp.ClientSession() as session:
-        # tasks = [
-        #     get_items_links_one_category(
-        #         category_id=category_id, 
-        #         api_url=api_url, 
-        #         session=session,
-        #         page=next_page
-        #     )
-        #     for category_id, next_page in categories.items()
-        # ]
-        # #logger.info(f'There are {len(tasks)} tasks')
-        # await asyncio.gather(*tasks)
-        for category_id, next_page in categories.items():
-            await get_items_links_one_category(
-                category_id=category_id, 
-                api_url=api_url, 
-                session=session,
-                page=next_page
-             )
-
-{
-    "AjPEJ5AjiEqXBLVWPcjzFB": 1
-}
-
-
-async def prepare_categories(categories: list) -> dict:
-    category_ids = ', '.join([f'"{category}"' for category in categories])
-    count_of_categories_query = f"""
-    SELECT category_id, total_items_count AS total_count, COUNT(*) AS link_count
-    FROM {GATHERED_ITEMS_LINKS_TABLE_NAME}
-    WHERE category_id IN ({category_ids})
-    GROUP BY category_id
-    """
-    #I know only count of pages but I dont about specific numbers of pages been processed!!! its a bug
-    #add column page for each link. sort by category get numbers of pages
-
-    async with aiosqlite.connect(GATHERED_ITEMS_LINKS_DB) as db:
-        async with db.execute(count_of_categories_query) as cursor:
-            category_counts = await cursor.fetchall()
-    
-    already_scraped_categories = {}
-    
-    for category_id, total_count, link_count in category_counts:
-        current_processed_pages = int(link_count / LIMIT_ITEMS_COUNT_ON_PAGE)
-        already_scraped_categories[category_id] = current_processed_pages
-    
-    for category in categories:
-        if category not in already_scraped_categories:
-            already_scraped_categories[category] = 1
-    
-    return already_scraped_categories
-
-
 async def write_to_db_pages_links(api_url: str, category_id: str, number_of_pages: int):
     links_rows = [
         (
@@ -244,18 +133,16 @@ async def write_to_db_pages_links(api_url: str, category_id: str, number_of_page
         )
         for page in range(1, number_of_pages+1)
     ]
-    #print(links_rows)
+
     async with aiosqlite.connect(GATHERED_ITEMS_LINKS_DB) as db:
-        columns = ', '.join([f'{name}' for name, _ in GATHERED_ITEMS_LINKS_COLUMNS.items()])
-        values = ', '.join([f'?' for _ in GATHERED_ITEMS_LINKS_COLUMNS.keys()])
+        columns = ', '.join([f'{name}' for name, _ in GATHERED_ITEMS_LINKS_COLUMNS_SCHEME.items()])
+        values = ', '.join([f'?' for _ in GATHERED_ITEMS_LINKS_COLUMNS_SCHEME.keys()])
         query = f"""
             INSERT INTO {GATHERED_ITEMS_LINKS_TABLE_NAME} ({columns})
             VALUES ({values})
         """
         await db.executemany(query, links_rows)
         await db.commit()
-
-
 
 
 def make_category_url(api_url: str, category_id: str):
@@ -279,21 +166,37 @@ async def get_count_pages_by_category(category_url: str) -> int:
             return handle_count_of_pages_by_category(category_info)
 
 
-async def checkprocessed_ctegories():
-    pass
+async def get_processed_ctegories_from_db(categories: list) -> dict:
+    category_ids = ', '.join([f'"{category}"' for category in categories])
+    count_of_categories_query = f"""
+    SELECT category_id
+    FROM {GATHERED_ITEMS_LINKS_TABLE_NAME}
+    WHERE category_id IN ({category_ids})
+    GROUP BY category_id
+    """
+    #I know only count of pages but I dont about specific numbers of pages been processed!!! its a bug
+    #add column page for each link. sort by category get numbers of pages
+
+    async with aiosqlite.connect(GATHERED_ITEMS_LINKS_DB) as db:
+        async with db.execute(count_of_categories_query) as cursor:
+            processed_categories = await cursor.fetchall()
+    
+    return {category[0]:True for category in processed_categories}
 
 
 async def prepare_pages_item_links(categories: list):
+    processed_categories = await get_processed_ctegories_from_db(categories)
     for category_id in categories:
-        logger.info(f"Prepare links for {category_id} category_id")
-        category_url = make_category_url(API_URL, category_id)
-        try:
-            pages = await get_count_pages_by_category(category_url)
-            #print(pages, category_id, category_url)
-            await write_to_db_pages_links(API_URL, category_id, pages)
-        except NoPagesForCategory:
-            logger.error("Cant get count of pages for {category_url} url")
-            continue
+        if category_id not in processed_categories:
+            logger.info(f"Prepare links for {category_id} category_id")
+            category_url = make_category_url(API_URL, category_id)
+            try:
+                pages = await get_count_pages_by_category(category_url)
+                #print(pages, category_id, category_url)
+                await write_to_db_pages_links(API_URL, category_id, pages)
+            except NoPagesForCategory:
+                logger.error("Cant get count of pages for {category_url} url")
+                continue
 
 
 async def main():
@@ -319,23 +222,15 @@ async def main():
         contents = await f.read()
         gathered_categories = json.loads(contents)
 
-    logger.info("Prepare ctagories need to be scraped")
+    logger.info("Preparing ctagories need to be scraped")
     await create_db_table_if_not_exist(
             GATHERED_ITEMS_LINKS_DB, 
             GATHERED_ITEMS_LINKS_TABLE_NAME, 
-            GATHERED_ITEMS_LINKS_COLUMNS
+            GATHERED_ITEMS_LINKS_COLUMNS_SCHEME
         )
-    # categories = [gathered_categories[category]["id"] for category in gathered_categories]
-    # already_scraped_categories = await prepare_categories(categories)
-
-    
-
-    # await get_items_links_all_caregories(
-    #     categories=already_scraped_categories,
-    #     api_url=API_URL, 
-    # )
 
     categories = [gathered_categories[category]["category_id"] for category in gathered_categories]
+    logger.info(f"There are {len(categories)} categories")
 
     await prepare_pages_item_links(categories)
 
