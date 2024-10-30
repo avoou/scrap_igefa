@@ -18,9 +18,9 @@ import logging
 # update df
 
 #https://api.igefa.de/shop/v1/products/by-variant/XVznJhi5M3mqCyBt2XKdr3
-#https://api.igefa.de/shop/v1/products?filter%5Btaxonomy%5D=UZ58DPNjGf6axF3MRtAw6Q
+#https://api.igefa.de/shop/v1/products?filter%5Btaxonomy%5D=AjPEJ5AjiEqXBLVWPcjzFB
 #https://api.igefa.de/shop/v1/products?limit=20&page=1&filter%5Btaxonomy%5D=UZ58DPNjGf6axF3MRtAw6Q&requiresAggregations=0&track=1
-#https://store.igefa.de/p/clean-and-clever-pro-ultranetzender-reiniger-pro-24-pro24-ultranetzender-reiniger/XVznJhi5M3mqCyBt2XKdr3
+
 
 
 logger = logging.getLogger()
@@ -40,6 +40,10 @@ GATHERED_ITEMS_LINKS_COLUMNS = {
     "gathered_items_count": "INTEGER",
     "wasScraped" : "INTEGER"
 }
+
+
+class NoPagesForCategory(Exception):
+    pass
 
 
 async def create_db_table_if_not_exist(db_name: str, table_name: str, columns: dict):
@@ -75,11 +79,13 @@ async def get_category(api_url: str, category_id: str, gathered_categories: dict
         gathered_categories.update(intermediate_dict) #async write to db?
         
         if categories_json.get("children"):
-            tasks = [
-                get_category(api_url, child["id"], gathered_categories, session, count)
-                for child in categories_json["children"]
-            ]
-            await asyncio.gather(*tasks)
+            # tasks = [
+            #     get_category(api_url, child["id"], gathered_categories, session, count)
+            #     for child in categories_json["children"]
+            # ]
+            # await asyncio.gather(*tasks)
+            for child in categories_json["children"]:
+                await get_category(api_url, child["id"], gathered_categories, session, count)
 
 
 async def gather_all_categories(api_url: str, category_id: str) -> dict:
@@ -126,7 +132,8 @@ async def get_items_json(session: aiohttp.ClientSession, items_by_category_url: 
 
 
 def make_item_link(api_url: str, id: str, slug: str):
-    return f'{api_url}/p/{slug}/{id}'
+    #https://api.igefa.de/shop/v1/products/by-variant/XVznJhi5M3mqCyBt2XKdr3
+    return f'{api_url}/products/by-variant/{id}'
 
 
 async def write_links_to_db(items: dict, category_id: str, api_url: str):
@@ -173,17 +180,24 @@ async def get_items_links_one_category(category_id: str, api_url: str, session: 
 async def get_items_links_all_caregories(categories: dict, api_url: str) -> dict:
     
     async with aiohttp.ClientSession() as session:
-        tasks = [
-            get_items_links_one_category(
+        # tasks = [
+        #     get_items_links_one_category(
+        #         category_id=category_id, 
+        #         api_url=api_url, 
+        #         session=session,
+        #         page=next_page
+        #     )
+        #     for category_id, next_page in categories.items()
+        # ]
+        # #logger.info(f'There are {len(tasks)} tasks')
+        # await asyncio.gather(*tasks)
+        for category_id, next_page in categories.items():
+            await get_items_links_one_category(
                 category_id=category_id, 
                 api_url=api_url, 
                 session=session,
                 page=next_page
-            )
-            for category_id, next_page in categories.items()
-        ]
-        #logger.info(f'There are {len(tasks)} tasks')
-        await asyncio.gather(*tasks)
+             )
 
 {
     "AjPEJ5AjiEqXBLVWPcjzFB": 1
@@ -218,6 +232,70 @@ async def prepare_categories(categories: list) -> dict:
     return already_scraped_categories
 
 
+async def write_to_db_pages_links(api_url: str, category_id: str, number_of_pages: int):
+    links_rows = [
+        (
+            category_id,
+            get_products_link(api_url, LIMIT_ITEMS_COUNT_ON_PAGE, page, category_id),
+            number_of_pages*20,
+            1,
+            0
+
+        )
+        for page in range(1, number_of_pages+1)
+    ]
+    #print(links_rows)
+    async with aiosqlite.connect(GATHERED_ITEMS_LINKS_DB) as db:
+        columns = ', '.join([f'{name}' for name, _ in GATHERED_ITEMS_LINKS_COLUMNS.items()])
+        values = ', '.join([f'?' for _ in GATHERED_ITEMS_LINKS_COLUMNS.keys()])
+        query = f"""
+            INSERT INTO {GATHERED_ITEMS_LINKS_TABLE_NAME} ({columns})
+            VALUES ({values})
+        """
+        await db.executemany(query, links_rows)
+        await db.commit()
+
+
+
+
+def make_category_url(api_url: str, category_id: str):
+    return f'{api_url}/products?filter%5Btaxonomy%5D={category_id}'
+
+
+def handle_count_of_pages_by_category(category_info: dict):
+    try:
+        pages = int((category_info["total"] / LIMIT_ITEMS_COUNT_ON_PAGE) + 1)
+    except KeyError:
+        raise NoPagesForCategory
+    return pages if pages >= 1 else 1
+
+
+async def get_count_pages_by_category(category_url: str) -> int:
+    async with aiohttp.ClientSession() as session:
+        async with session.get(category_url) as response:
+            category_info = await response.json()
+        
+        if category_info:
+            return handle_count_of_pages_by_category(category_info)
+
+
+async def checkprocessed_ctegories():
+    pass
+
+
+async def prepare_pages_item_links(categories: list):
+    for category_id in categories:
+        logger.info(f"Prepare links for {category_id} category_id")
+        category_url = make_category_url(API_URL, category_id)
+        try:
+            pages = await get_count_pages_by_category(category_url)
+            #print(pages, category_id, category_url)
+            await write_to_db_pages_links(API_URL, category_id, pages)
+        except NoPagesForCategory:
+            logger.error("Cant get count of pages for {category_url} url")
+            continue
+
+
 async def main():
     logger.info("Step: 1 \nGathering all categories of items...")
 
@@ -242,20 +320,24 @@ async def main():
         gathered_categories = json.loads(contents)
 
     logger.info("Prepare ctagories need to be scraped")
-
-    categories = [gathered_categories[category]["id"] for category in gathered_categories]
-    already_scraped_categories = await prepare_categories(categories)
-
     await create_db_table_if_not_exist(
-        GATHERED_ITEMS_LINKS_DB, 
-        GATHERED_ITEMS_LINKS_TABLE_NAME, 
-        GATHERED_ITEMS_LINKS_COLUMNS
-    )
+            GATHERED_ITEMS_LINKS_DB, 
+            GATHERED_ITEMS_LINKS_TABLE_NAME, 
+            GATHERED_ITEMS_LINKS_COLUMNS
+        )
+    # categories = [gathered_categories[category]["id"] for category in gathered_categories]
+    # already_scraped_categories = await prepare_categories(categories)
 
-    await get_items_links_all_caregories(
-        categories=already_scraped_categories,
-        api_url=API_URL, 
-    )
+    
+
+    # await get_items_links_all_caregories(
+    #     categories=already_scraped_categories,
+    #     api_url=API_URL, 
+    # )
+
+    categories = [gathered_categories[category]["category_id"] for category in gathered_categories]
+
+    await prepare_pages_item_links(categories)
 
 
 
