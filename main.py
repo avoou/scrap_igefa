@@ -11,7 +11,7 @@ import logging
 #https://api.igefa.de/shop/v1/products?filter%5Btaxonomy%5D=AjPEJ5AjiEqXBLVWPcjzFB
 #https://api.igefa.de/shop/v1/products?limit=20&page=1&filter%5Btaxonomy%5D=UZ58DPNjGf6axF3MRtAw6Q&requiresAggregations=0&track=1
 
-
+#https://api.igefa.de/shop/v1/products?filter%5Bid%5D%5B0%5D=Nk8vRrg6kk6cQQFMCxTbg5&page=1&requiresAggregations=0
 
 logger = logging.getLogger()
 logging.basicConfig(level=logging.INFO)
@@ -160,7 +160,10 @@ def handle_count_of_pages_by_category(category_info: dict):
 async def get_count_pages_by_category(category_url: str) -> int:
     async with aiohttp.ClientSession() as session:
         async with session.get(category_url) as response:
-            category_info = await response.json()
+            try:
+                category_info = await response.json()
+            except aiohttp.client_exceptions.ContentTypeError:
+                category_info = {}
         
         if category_info:
             return handle_count_of_pages_by_category(category_info)
