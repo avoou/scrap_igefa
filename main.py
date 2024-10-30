@@ -198,6 +198,8 @@ async def prepare_categories(categories: list) -> dict:
     WHERE category_id IN ({category_ids})
     GROUP BY category_id
     """
+    #I know only count of pages but I dont about specific numbers of pages been processed!!! its a bug
+    #add column page for each link. sort by category get numbers of pages
 
     async with aiosqlite.connect(GATHERED_ITEMS_LINKS_DB) as db:
         async with db.execute(count_of_categories_query) as cursor:
