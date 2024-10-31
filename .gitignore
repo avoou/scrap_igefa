@@ -5,6 +5,8 @@ __pycache__/
 
 *.db
 utils.py
+main_sync.py
+gathered_links2.json
 
 # C extensions
 *.so

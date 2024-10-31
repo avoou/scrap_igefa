@@ -10,8 +10,10 @@ import logging
 #https://api.igefa.de/shop/v1/products/by-variant/XVznJhi5M3mqCyBt2XKdr3
 #https://api.igefa.de/shop/v1/products?filter%5Btaxonomy%5D=AjPEJ5AjiEqXBLVWPcjzFB
 #https://api.igefa.de/shop/v1/products?limit=20&page=1&filter%5Btaxonomy%5D=UZ58DPNjGf6axF3MRtAw6Q&requiresAggregations=0&track=1
-
 #https://api.igefa.de/shop/v1/products?filter%5Bid%5D%5B0%5D=Nk8vRrg6kk6cQQFMCxTbg5&page=1&requiresAggregations=0
+
+#SELECT COUNT(*) FROM gathered_items_links_table WHERE wasScraped = 1
+#SELECT COUNT(*) FROM gathered_items_info_table
 
 logger = logging.getLogger()
 logging.basicConfig(level=logging.INFO)
@@ -20,7 +22,9 @@ logging.basicConfig(level=logging.INFO)
 TARGET_URL = 'https://store.igefa.de'
 CATEGORIES_API_ID = 'f4SXre6ovVohkGNrAvh3zR'
 API_URL = 'https://api.igefa.de/shop/v1'
+
 LIMIT_ITEMS_COUNT_ON_PAGE= 20
+
 GATHERED_ITEMS_LINKS_DB = 'gathered_items_links.db'
 GATHERED_ITEMS_LINKS_TABLE_NAME = 'gathered_items_links_table'
 GATHERED_ITEMS_LINKS_COLUMNS_SCHEME = {
@@ -31,26 +35,39 @@ GATHERED_ITEMS_LINKS_COLUMNS_SCHEME = {
     "wasScraped" : "INTEGER"
 }
 
+GATHERED_ITEMS_INFO_DB = 'gathered_items_info.db'
+GATHERED_ITEMS_INFO_TABLE_NAME = 'gathered_items_info_table'
+GATHERED_ITEMS_INFO_COLUMNS_SCHEME = {
+    "original_data_column_1": 'TEXT',
+    "original_data_column_2": 'TEXT',
+    "original_data_column_3": 'TEXT',
+    "product_name": 'TEXT',
+    "supplier_article_number": 'TEXT',
+    "gtin_number": 'TEXT',
+    "article_number": 'TEXT',
+    "product_image_url": 'TEXT',
+    "product_description": 'TEXT',
+    "manufacturer": 'TEXT',
+}
+
 
 class NoPagesForCategory(Exception):
     pass
 
 
+class CantGetJSONByURL(Exception):
+    pass
+
+
 async def create_db_table_if_not_exist(db_name: str, table_name: str, columns: dict):
+    """Create db with db_name if there is not one"""
     async with aiosqlite.connect(db_name) as db:
         columns = ', '.join([f'{name} {column_type}' for name, column_type in columns.items()])
         await db.execute(f"CREATE TABLE IF NOT EXISTS {table_name} ({columns})")
         await db.commit()
 
 
-async def make_query_to_db(db_name: str, query: str):
-    async with aiosqlite.connect(db_name) as db:
-        await db.execute(query)
-        await db.commit()
-
-
 async def get_category(api_url: str, category_id: str, gathered_categories: dict, session: aiohttp.ClientSession, count: list) -> None:
-    
     link = f"{api_url}/taxonomies/{category_id}"
     
     async with session.get(link) as response:
@@ -157,6 +174,10 @@ def handle_count_of_pages_by_category(category_info: dict):
     return pages if pages >= 1 else 1
 
 
+async def get_json_by_url(url: str):
+    pass
+
+
 async def get_count_pages_by_category(category_url: str) -> int:
     async with aiohttp.ClientSession() as session:
         async with session.get(category_url) as response:
@@ -237,8 +258,102 @@ async def prepare_categories(gathered_categories: dict) -> list:
     return categories
 
 
-async def scraping_items_info():
-    pass
+async def save_item_info_to_db(item_info: dict):
+    async with aiosqlite.connect(GATHERED_ITEMS_INFO_DB) as db:
+        columns = ', '.join([f'{name}' for name, _ in GATHERED_ITEMS_INFO_COLUMNS_SCHEME.items()])
+        values = ', '.join([f'?' for _ in GATHERED_ITEMS_INFO_COLUMNS_SCHEME.keys()])
+        query = f"""
+            INSERT INTO {GATHERED_ITEMS_INFO_TABLE_NAME} ({columns})
+            VALUES ({values})
+        """
+        row = [tuple(item for _, item in item_info.items())]
+        await db.executemany(query, row)
+        await db.commit()
+        #print(f"puted {item_info['product_name']}")
+
+
+async def mark_link_as_scraped_in_db(page_link: str, category_id: str):
+    async with aiosqlite.connect(GATHERED_ITEMS_LINKS_DB) as db:
+        await db.execute(
+            f"""
+            UPDATE gathered_items_links_table
+            SET wasScraped = {1}
+            WHERE category_id = "{category_id}"
+            AND link = "{page_link}"
+            """
+        )
+        await db.commit()
+
+
+async def parse_item_info(items_json: dict, page_link: str, category_id: str):
+    for item in items_json['hits']:
+        try:
+            original_data_column_3 = item.get('mainVariant', {}).get('description').split('\n---\n')[0]
+        except AttributeError:
+            original_data_column_3 = None
+        try:
+            product_description = item.get('mainVariant', {}).get('description').split('\n---\n')[1]
+        except IndexError:
+            product_description = None
+        manufacturer = ''.join([attr.get('label') for attr in item.get('clientFields', {}).get('attributes', []) if attr.get('label', '') == "Hersteller"])
+        manufacturer = None if not manufacturer else manufacturer
+        product_image_url = ';'.join([image.get('url') for image in item.get('mainVariant', {}).get('images', [])])
+        product_image_url = None if not product_image_url else product_image_url
+
+        item_info = {
+            "original_data_column_1": 'original_data_column_1',
+            "original_data_column_2": item.get('variationName'),
+            "original_data_column_3": original_data_column_3,
+            "product_name": item.get('mainVariant', {}).get('name'),
+            "supplier_article_number": item.get('mainVariant', {}).get('sku'),
+            "gtin_number": item.get('mainVariant', {}).get('gtin'),
+            "article_number": item.get('skuProvidedBySupplier'),
+            "product_image_url": product_image_url,
+            "product_description": product_description,
+            "manufacturer": manufacturer
+        }
+
+        await save_item_info_to_db(item_info)
+        await mark_link_as_scraped_in_db(page_link, category_id)
+    #logger.info(f'Processed {page_link} url')
+        
+
+async def process_page(page_link: str, category_id: str):
+    
+    async with aiohttp.ClientSession() as session:
+        async with session.get(page_link) as response:
+            try:
+                category_info = await response.json()
+            except aiohttp.client_exceptions.ContentTypeError:
+                raise CantGetJSONByURL
+        
+    await parse_item_info(category_info, page_link, category_id)
+
+
+async def handle_wasnt_scraped_category(wasnt_scraped_categories: list[tuple]):
+    for category, page_link in wasnt_scraped_categories:
+        try:
+            await process_page(page_link, category)
+        except CantGetJSONByURL:
+            logging.error(f"Cant get JSON from {page_link} URL")
+
+
+async def scraping_items_info(categories: list):
+    for category in categories:
+        logger.info(f'Scraping items info for {category} category')
+
+        wasnt_scraped_categories_yet_query = f"""
+            SELECT category_id, link
+            FROM {GATHERED_ITEMS_LINKS_TABLE_NAME}
+            WHERE category_id = "{category}"
+            AND wasScraped = 0
+        """
+
+        async with aiosqlite.connect(GATHERED_ITEMS_LINKS_DB) as db:
+            async with db.execute(wasnt_scraped_categories_yet_query) as cursor:
+                wasnt_scraped_categories = await cursor.fetchall()
+        
+        await handle_wasnt_scraped_category(wasnt_scraped_categories)
 
 
 async def main():
@@ -250,10 +365,7 @@ async def main():
     await prepare_pages_item_links(categories)
 
     logger.info("Step: 3 \nScraping items info for each category")
-    await scraping_items_info()
-    
-
-
+    await scraping_items_info(categories)
 
 
 if __name__ == '__main__':
