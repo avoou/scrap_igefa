@@ -244,11 +244,7 @@ async def get_all_categories() -> dict:
 
 async def prepare_categories(gathered_categories: dict) -> list:
     
-    await create_db_table_if_not_exist(
-            GATHERED_ITEMS_LINKS_DB, 
-            GATHERED_ITEMS_LINKS_TABLE_NAME, 
-            GATHERED_ITEMS_LINKS_COLUMNS_SCHEME
-        )
+    
 
     categories = [gathered_categories[category]["category_id"] for category in gathered_categories]
 
@@ -356,7 +352,17 @@ async def main():
 
     logger.info("Step: 2 \nPreparing ctagories need to be scraped")
     categories = await prepare_categories(gathered_categories)
-
+    
+    await create_db_table_if_not_exist(
+            GATHERED_ITEMS_LINKS_DB, 
+            GATHERED_ITEMS_LINKS_TABLE_NAME, 
+            GATHERED_ITEMS_LINKS_COLUMNS_SCHEME
+        )
+    await create_db_table_if_not_exist(
+            GATHERED_ITEMS_INFO_DB, 
+            GATHERED_ITEMS_INFO_TABLE_NAME, 
+            GATHERED_ITEMS_INFO_COLUMNS_SCHEME
+        )
     async with aiosqlite.connect(GATHERED_ITEMS_LINKS_DB) as db:
         links_conn = db
         await prepare_pages_item_links(categories, links_conn)
