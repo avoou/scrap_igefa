@@ -177,8 +177,6 @@ async def get_processed_ctegories_from_db(categories: list) -> dict:
     WHERE category_id IN ({category_ids})
     GROUP BY category_id
     """
-    #I know only count of pages but I dont about specific numbers of pages been processed!!! its a bug
-    #add column page for each link. sort by category get numbers of pages
 
     async with aiosqlite.connect(GATHERED_ITEMS_LINKS_DB) as db:
         async with db.execute(count_of_categories_query) as cursor:
@@ -202,11 +200,10 @@ async def prepare_pages_item_links(categories: list):
                 continue
 
 
-async def main():
+async def get_all_categories() -> dict:
     logger.info("Step: 1 \nGathering all categories of items...")
-
     gathered_categories_filename = 'gathered_categories.json'
-
+    
     if not os.path.exists(gathered_categories_filename):
         gathered_categories = await gather_all_categories(
             api_url=API_URL,
@@ -216,15 +213,17 @@ async def main():
             await f.write(json.dumps(gathered_categories, ensure_ascii=False))
 
     logger.info('Using already existed file with categories')
-
     logger.info(f'Step: 2 \nSave list of gategories to a {gathered_categories_filename} file')
-    
     logger.info("Step: 3 \nGetting links of items by category")
     
     async with aiofiles.open(gathered_categories_filename, 'r') as f:
         contents = await f.read()
         gathered_categories = json.loads(contents)
+    #what to do if there is a file but without any category???
+    return gathered_categories
 
+
+async def prepare_categories(gathered_categories: dict) -> list:
     logger.info("Preparing ctagories need to be scraped")
     await create_db_table_if_not_exist(
             GATHERED_ITEMS_LINKS_DB, 
@@ -234,9 +233,17 @@ async def main():
 
     categories = [gathered_categories[category]["category_id"] for category in gathered_categories]
     logger.info(f"There are {len(categories)} categories")
+    return categories
 
+
+async def main():
+    gathered_categories = await get_all_categories()
+
+    categories = await prepare_categories(gathered_categories)
+    
     await prepare_pages_item_links(categories)
 
+    logger.info("Links for all categories pages have been prepeared")
 
 
 
