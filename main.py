@@ -198,10 +198,10 @@ async def prepare_pages_item_links(categories: list):
             except NoPagesForCategory:
                 logger.error("Cant get count of pages for {category_url} url")
                 continue
+    logger.info("Links for all categories pages have been prepeared")
 
 
 async def get_all_categories() -> dict:
-    logger.info("Step: 1 \nGathering all categories of items...")
     gathered_categories_filename = 'gathered_categories.json'
     
     if not os.path.exists(gathered_categories_filename):
@@ -213,8 +213,8 @@ async def get_all_categories() -> dict:
             await f.write(json.dumps(gathered_categories, ensure_ascii=False))
 
     logger.info('Using already existed file with categories')
-    logger.info(f'Step: 2 \nSave list of gategories to a {gathered_categories_filename} file')
-    logger.info("Step: 3 \nGetting links of items by category")
+    logger.info(f'Save list of gategories to a {gathered_categories_filename} file')
+    logger.info("Getting links of items by category")
     
     async with aiofiles.open(gathered_categories_filename, 'r') as f:
         contents = await f.read()
@@ -224,7 +224,7 @@ async def get_all_categories() -> dict:
 
 
 async def prepare_categories(gathered_categories: dict) -> list:
-    logger.info("Preparing ctagories need to be scraped")
+    
     await create_db_table_if_not_exist(
             GATHERED_ITEMS_LINKS_DB, 
             GATHERED_ITEMS_LINKS_TABLE_NAME, 
@@ -232,18 +232,27 @@ async def prepare_categories(gathered_categories: dict) -> list:
         )
 
     categories = [gathered_categories[category]["category_id"] for category in gathered_categories]
+
     logger.info(f"There are {len(categories)} categories")
     return categories
 
 
+async def scraping_items_info():
+    pass
+
+
 async def main():
+    logger.info("Step: 1 \nGathering all categories of items...")
     gathered_categories = await get_all_categories()
 
+    logger.info("Step: 2 \nPreparing ctagories need to be scraped")
     categories = await prepare_categories(gathered_categories)
-    
     await prepare_pages_item_links(categories)
 
-    logger.info("Links for all categories pages have been prepeared")
+    logger.info("Step: 3 \nScraping items info for each category")
+    await scraping_items_info()
+    
+
 
 
 
