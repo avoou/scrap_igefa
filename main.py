@@ -103,7 +103,7 @@ async def gather_all_categories(api_url: str, category_id: str) -> dict:
             count=count
         )
     
-    logger.info(f'There has been gathered {count} categories') #483
+    #logger.info(f'There has been gathered {count} categories') #483
 
     return gathered_categories
 
@@ -243,9 +243,6 @@ async def get_all_categories() -> dict:
 
 
 async def prepare_categories(gathered_categories: dict) -> list:
-    
-    
-
     categories = [gathered_categories[category]["category_id"] for category in gathered_categories]
 
     logger.info(f"There are {len(categories)} categories")
@@ -277,36 +274,37 @@ async def mark_link_as_scraped_in_db(page_link: str, category_id: str, links_con
 
 
 async def parse_item_info(items_json: dict, page_link: str, category_id: str, info_conn, links_conn):
-    for item in items_json['hits']:
-        try:
-            original_data_column_3 = item.get('mainVariant', {}).get('description').split('\n---\n')[0]
-        except AttributeError:
-            original_data_column_3 = None
-        try:
-            product_description = item.get('mainVariant', {}).get('description').split('\n---\n')[1]
-        except IndexError:
-            product_description = None
-        manufacturer = ''.join([attr.get('label') for attr in item.get('clientFields', {}).get('attributes', []) if attr.get('label', '') == "Hersteller"])
-        manufacturer = None if not manufacturer else manufacturer
-        product_image_url = ';'.join([image.get('url') for image in item.get('mainVariant', {}).get('images', [])])
-        product_image_url = None if not product_image_url else product_image_url
-
-        item_info = {
-            "original_data_column_1": 'original_data_column_1',
-            "original_data_column_2": item.get('variationName'),
-            "original_data_column_3": original_data_column_3,
-            "product_name": item.get('mainVariant', {}).get('name'),
-            "supplier_article_number": item.get('mainVariant', {}).get('sku'),
-            "gtin_number": item.get('mainVariant', {}).get('gtin'),
-            "article_number": item.get('skuProvidedBySupplier'),
-            "product_image_url": product_image_url,
-            "product_description": product_description,
-            "manufacturer": manufacturer
-        }
-
-        await save_item_info_to_db(item_info, info_conn)
-        await mark_link_as_scraped_in_db(page_link, category_id, links_conn)
-    logger.info(f'Processed {page_link} url')
+    if items_json.get('hits'):
+        for item in items_json['hits']:
+            try:
+                original_data_column_3 = item.get('mainVariant', {}).get('description').split('\n---\n')[0]
+            except AttributeError:
+                original_data_column_3 = None
+            try:
+                product_description = item.get('mainVariant', {}).get('description').split('\n---\n')[1]
+            except IndexError:
+                product_description = None
+            manufacturer = ''.join([attr.get('label') for attr in item.get('clientFields', {}).get('attributes', []) if attr.get('label', '') == "Hersteller"])
+            manufacturer = None if not manufacturer else manufacturer
+            product_image_url = ';'.join([image.get('url') for image in item.get('mainVariant', {}).get('images', [])])
+            product_image_url = None if not product_image_url else product_image_url
+    
+            item_info = {
+                "original_data_column_1": 'original_data_column_1',
+                "original_data_column_2": item.get('variationName'),
+                "original_data_column_3": original_data_column_3,
+                "product_name": item.get('mainVariant', {}).get('name'),
+                "supplier_article_number": item.get('mainVariant', {}).get('sku'),
+                "gtin_number": item.get('mainVariant', {}).get('gtin'),
+                "article_number": item.get('skuProvidedBySupplier'),
+                "product_image_url": product_image_url,
+                "product_description": product_description,
+                "manufacturer": manufacturer
+            }
+    
+            await save_item_info_to_db(item_info, info_conn)
+            await mark_link_as_scraped_in_db(page_link, category_id, links_conn)
+        #logger.info(f'Processed {page_link} url')
         
 
 async def process_page(page_link: str, category_id: str, info_conn, links_conn):
