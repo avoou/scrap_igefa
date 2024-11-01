@@ -284,7 +284,7 @@ async def parse_item_info(items_json: dict, page_link: str, category_id: str, in
                 product_description = item.get('mainVariant', {}).get('description').split('\n---\n')[1]
             except IndexError:
                 product_description = None
-            manufacturer = ''.join([attr.get('label') for attr in item.get('clientFields', {}).get('attributes', []) if attr.get('label', '') == "Hersteller"])
+            manufacturer = ''.join([attr.get('label') for attr in item.get('clientFields', {}).get('attributes', []) if attr.get('label', '') == "Hersteller"]) #its a bug
             manufacturer = None if not manufacturer else manufacturer
             product_image_url = ';'.join([image.get('url') for image in item.get('mainVariant', {}).get('images', [])])
             product_image_url = None if not product_image_url else product_image_url
